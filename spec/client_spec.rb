@@ -360,6 +360,7 @@ describe ElasticAppSearchRuby::Client do
           "weight" => 1
         }
       },
+      "result_fields" => {"id"=>{"raw"=>{}}},
       "boosts" => {}
     } }
 
@@ -369,6 +370,7 @@ describe ElasticAppSearchRuby::Client do
           "weight" => 3
         }
       },
+      "result_fields" => {"id"=>{"raw"=>{}}},
       "boosts" => {}
     } }
 
