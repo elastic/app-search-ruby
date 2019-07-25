@@ -1,4 +1,4 @@
-module ElasticAppSearchRuby
+module ElasticAppSearch
   class Client
     module QuerySuggestion
       # Request Query Suggestions

@@ -1,4 +1,4 @@
-module ElasticAppSearchRuby
+module ElasticAppSearch
   module Utils
     extend self
 

@@ -1,4 +1,4 @@
-module ElasticAppSearchRuby
+module ElasticAppSearch
   class Client
     module Search
       # Search for documents

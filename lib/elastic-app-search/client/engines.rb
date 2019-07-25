@@ -1,6 +1,6 @@
 # Engines are the core concept representing indexes in App Search.
 #
-module ElasticAppSearchRuby
+module ElasticAppSearch
   class Client
     module Engines
       def list_engines(current: 1, size: 20)

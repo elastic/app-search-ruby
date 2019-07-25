@@ -2,7 +2,7 @@ require 'bundler/setup'
 require 'rspec'
 require 'webmock/rspec'
 require 'awesome_print'
-require 'elastic-app-search-ruby'
+require 'elastic-app-search'
 require 'config_helper'
 
 WebMock.allow_net_connect!

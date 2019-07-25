@@ -1,4 +1,4 @@
-module ElasticAppSearchRuby
+module ElasticAppSearch
   class ClientException < StandardError
     attr_reader :errors
 

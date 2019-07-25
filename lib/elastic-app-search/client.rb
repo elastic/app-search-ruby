@@ -1,26 +1,26 @@
 require 'set'
-require 'elastic-app-search-ruby/request'
-require 'elastic-app-search-ruby/utils'
+require 'elastic-app-search/request'
+require 'elastic-app-search/utils'
 require 'jwt'
 
-module ElasticAppSearchRuby
+module ElasticAppSearch
   # API client for the {Elastic App Search API}[https://www.elastic.co/cloud/app-search-service].
   class Client
-    autoload :Documents, 'elastic-app-search-ruby/client/documents'
-    autoload :Engines, 'elastic-app-search-ruby/client/engines'
-    autoload :Search, 'elastic-app-search-ruby/client/search'
-    autoload :QuerySuggestion, 'elastic-app-search-ruby/client/query_suggestion'
-    autoload :SearchSettings, 'elastic-app-search-ruby/client/search_settings'
+    autoload :Documents, 'elastic-app-search/client/documents'
+    autoload :Engines, 'elastic-app-search/client/engines'
+    autoload :Search, 'elastic-app-search/client/search'
+    autoload :QuerySuggestion, 'elastic-app-search/client/query_suggestion'
+    autoload :SearchSettings, 'elastic-app-search/client/search_settings'
 
     DEFAULT_TIMEOUT = 15
 
-    include ElasticAppSearchRuby::Request
+    include ElasticAppSearch::Request
 
     attr_reader :api_key, :open_timeout, :overall_timeout, :api_endpoint
 
-    # Create a new ElasticAppSearchRuby::Client client
+    # Create a new ElasticAppSearch::Client client
     #
-    # @param options [Hash] a hash of configuration options that will override what is set on the ElasticAppSearchRuby class.
+    # @param options [Hash] a hash of configuration options that will override what is set on the ElasticAppSearch class.
     # @option options [String] :account_host_key or :host_identifier is your Host Identifier to use with this client.
     # @option options [String] :api_key can be any of your API Keys. Each has a different scope, so ensure you are using the correct key.
     # @option options [Numeric] :overall_timeout overall timeout for requests in seconds (default: 15s)
@@ -55,11 +55,11 @@ module ElasticAppSearchRuby
       end
     end
 
-    include ElasticAppSearchRuby::Client::Documents
-    include ElasticAppSearchRuby::Client::Engines
-    include ElasticAppSearchRuby::Client::Search
-    include ElasticAppSearchRuby::Client::SignedSearchOptions
-    include ElasticAppSearchRuby::Client::QuerySuggestion
-    include ElasticAppSearchRuby::Client::SearchSettings
+    include ElasticAppSearch::Client::Documents
+    include ElasticAppSearch::Client::Engines
+    include ElasticAppSearch::Client::Search
+    include ElasticAppSearch::Client::SignedSearchOptions
+    include ElasticAppSearch::Client::QuerySuggestion
+    include ElasticAppSearch::Client::SearchSettings
   end
 end

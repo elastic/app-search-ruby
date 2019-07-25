@@ -1,5 +1,5 @@
 # Search Settings is used to adjust weights and boosts
-module ElasticAppSearchRuby
+module ElasticAppSearch
   class Client
     module SearchSettings
 
