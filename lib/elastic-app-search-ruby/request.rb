@@ -1,13 +1,13 @@
 require 'net/https'
 require 'json'
 require 'time'
-require 'swiftype-app-search/exceptions'
-require 'swiftype-app-search/version'
+require 'elastic-app-search-ruby/exceptions'
+require 'elastic-app-search-ruby/version'
 require 'openssl'
 
-module SwiftypeAppSearch
-  CLIENT_NAME = 'swiftype-app-search-ruby'
-  CLIENT_VERSION = SwiftypeAppSearch::VERSION
+module ElasticAppSearchRuby
+  CLIENT_NAME = 'elastic-app-search-ruby'
+  CLIENT_VERSION = ElasticAppSearchRuby::VERSION
 
   module Request
     attr_accessor :last_request
@@ -65,17 +65,17 @@ module SwiftypeAppSearch
         when Net::HTTPSuccess
           return response_json
         when Net::HTTPBadRequest
-          raise SwiftypeAppSearch::BadRequest, response_json
+          raise ElasticAppSearchRuby::BadRequest, response_json
         when Net::HTTPUnauthorized
-          raise SwiftypeAppSearch::InvalidCredentials, response_json
+          raise ElasticAppSearchRuby::InvalidCredentials, response_json
         when Net::HTTPNotFound
-          raise SwiftypeAppSearch::NonExistentRecord, response_json
+          raise ElasticAppSearchRuby::NonExistentRecord, response_json
         when Net::HTTPForbidden
-          raise SwiftypeAppSearch::Forbidden, response_json
+          raise ElasticAppSearchRuby::Forbidden, response_json
         when Net::HTTPRequestEntityTooLarge
-          raise SwiftypeAppSearch::RequestEntityTooLarge, response_json
+          raise ElasticAppSearchRuby::RequestEntityTooLarge, response_json
         else
-          raise SwiftypeAppSearch::UnexpectedHTTPException.new(response, response_json)
+          raise ElasticAppSearchRuby::UnexpectedHTTPException.new(response, response_json)
         end
       end
     end

@@ -1,5 +1,5 @@
 # Search Settings is used to adjust weights and boosts
-module SwiftypeAppSearch
+module ElasticAppSearchRuby
   class Client
     module SearchSettings
 

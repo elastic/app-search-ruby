@@ -1,7 +1,7 @@
 # Documents have fields that can be searched or filtered.
 #
 # For more information on indexing documents, see the {App Search documentation}[https://swiftype.com/documentation/app-search/].
-module SwiftypeAppSearch
+module ElasticAppSearchRuby
   class Client
     module Documents
 
@@ -33,7 +33,7 @@ module SwiftypeAppSearch
       #
       # @return [Hash] processed Document Status hash
       #
-      # @raise [SwiftypeAppSearch::InvalidDocument] when the document has processing errors returned from the api
+      # @raise [ElasticAppSearchRuby::InvalidDocument] when the document has processing errors returned from the api
       # @raise [Timeout::Error] when timeout expires waiting for statuses
       def index_document(engine_name, document)
         response = index_documents(engine_name, [document])
@@ -49,7 +49,7 @@ module SwiftypeAppSearch
       #
       # @return [Array<Hash>] an Array of processed Document Status hashes
       #
-      # @raise [SwiftypeAppSearch::InvalidDocument] when any documents have processing errors returned from the api
+      # @raise [ElasticAppSearchRuby::InvalidDocument] when any documents have processing errors returned from the api
       # @raise [Timeout::Error] when timeout expires waiting for statuses
       def index_documents(engine_name, documents)
         documents.map! { |document| normalize_document(document) }
@@ -63,7 +63,7 @@ module SwiftypeAppSearch
       #
       # @return [Array<Hash>] an Array of processed Document Status hashes
       #
-      # @raise [SwiftypeAppSearch::InvalidDocument] when any documents have processing errors returned from the api
+      # @raise [ElasticAppSearchRuby::InvalidDocument] when any documents have processing errors returned from the api
       # @raise [Timeout::Error] when timeout expires waiting for statuses
       def update_documents(engine_name, documents)
         documents.map! { |document| normalize_document(document) }

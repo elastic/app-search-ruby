@@ -1,6 +1,6 @@
 # Engines are the core concept representing indexes in App Search.
 #
-module SwiftypeAppSearch
+module ElasticAppSearchRuby
   class Client
     module Engines
       def list_engines(current: 1, size: 20)

@@ -1,4 +1,4 @@
-module SwiftypeAppSearch
+module ElasticAppSearchRuby
   module Utils
     extend self
 

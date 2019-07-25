@@ -1,26 +1,26 @@
 require 'set'
-require 'swiftype-app-search/request'
-require 'swiftype-app-search/utils'
+require 'elastic-app-search-ruby/request'
+require 'elastic-app-search-ruby/utils'
 require 'jwt'
 
-module SwiftypeAppSearch
-  # API client for the {Swiftype App Search API}[https://swiftype.com/app-search].
+module ElasticAppSearchRuby
+  # API client for the {Elastic App Search API}[https://www.elastic.co/cloud/app-search-service].
   class Client
-    autoload :Documents, 'swiftype-app-search/client/documents'
-    autoload :Engines, 'swiftype-app-search/client/engines'
-    autoload :Search, 'swiftype-app-search/client/search'
-    autoload :QuerySuggestion, 'swiftype-app-search/client/query_suggestion'
-    autoload :SearchSettings, 'swiftype-app-search/client/search_settings'
+    autoload :Documents, 'elastic-app-search-ruby/client/documents'
+    autoload :Engines, 'elastic-app-search-ruby/client/engines'
+    autoload :Search, 'elastic-app-search-ruby/client/search'
+    autoload :QuerySuggestion, 'elastic-app-search-ruby/client/query_suggestion'
+    autoload :SearchSettings, 'elastic-app-search-ruby/client/search_settings'
 
     DEFAULT_TIMEOUT = 15
 
-    include SwiftypeAppSearch::Request
+    include ElasticAppSearchRuby::Request
 
     attr_reader :api_key, :open_timeout, :overall_timeout, :api_endpoint
 
-    # Create a new SwiftypeAppSearch::Client client
+    # Create a new ElasticAppSearchRuby::Client client
     #
-    # @param options [Hash] a hash of configuration options that will override what is set on the SwiftypeAppSearch class.
+    # @param options [Hash] a hash of configuration options that will override what is set on the ElasticAppSearchRuby class.
     # @option options [String] :account_host_key or :host_identifier is your Host Identifier to use with this client.
     # @option options [String] :api_key can be any of your API Keys. Each has a different scope, so ensure you are using the correct key.
     # @option options [Numeric] :overall_timeout overall timeout for requests in seconds (default: 15s)
@@ -55,11 +55,11 @@ module SwiftypeAppSearch
       end
     end
 
-    include SwiftypeAppSearch::Client::Documents
-    include SwiftypeAppSearch::Client::Engines
-    include SwiftypeAppSearch::Client::Search
-    include SwiftypeAppSearch::Client::SignedSearchOptions
-    include SwiftypeAppSearch::Client::QuerySuggestion
-    include SwiftypeAppSearch::Client::SearchSettings
+    include ElasticAppSearchRuby::Client::Documents
+    include ElasticAppSearchRuby::Client::Engines
+    include ElasticAppSearchRuby::Client::Search
+    include ElasticAppSearchRuby::Client::SignedSearchOptions
+    include ElasticAppSearchRuby::Client::QuerySuggestion
+    include ElasticAppSearchRuby::Client::SearchSettings
   end
 end

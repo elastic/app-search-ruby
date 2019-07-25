@@ -1,4 +1,4 @@
-module SwiftypeAppSearch
+module ElasticAppSearchRuby
   class Client
     module QuerySuggestion
       # Request Query Suggestions
