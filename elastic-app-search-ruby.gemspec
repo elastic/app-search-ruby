@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/elastic/app-search-ruby"
   s.summary     = %q{Official gem for accessing the Elastic App Search API}
   s.description = %q{API client for accessing the Elastic App Search API with no dependencies.}
-  s.licenses    = ['MIT']
+  s.licenses    = ['Apache-2.0']
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

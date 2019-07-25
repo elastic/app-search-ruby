@@ -312,6 +312,6 @@ We welcome contributors to the project. Before you begin, a couple notes...
 
 ## License 📗
 
-[MIT](https://github.com/elastic/app-search-ruby/blob/master/LICENSE.txt) © [Elastic](https://github.com/elastic)
+[Apache 2.0](https://github.com/elastic/app-search-ruby/blob/master/LICENSE.txt) © [Elastic](https://github.com/elastic)
 
 Thank you to all the [contributors](https://github.com/elastic/app-search-ruby/graphs/contributors)!
