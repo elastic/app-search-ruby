@@ -1,10 +1,10 @@
 require 'config_helper'
 
-describe ElasticAppSearch::Client do
+describe Elastic::AppSearch::Client do
   let(:engine_name) { "ruby-client-test-#{Time.now.to_i}" }
 
   include_context 'App Search Credentials'
-  let(:client) { ElasticAppSearch::Client.new(client_options) }
+  let(:client) { Elastic::AppSearch::Client.new(client_options) }
 
   before(:all) do
     # Bootstraps a static engine for 'read-only' options that require indexing
@@ -14,7 +14,7 @@ describe ElasticAppSearch::Client do
     as_host_identifier = ConfigHelper.get_as_host_identifier
     as_api_endpoint = ConfigHelper.get_as_api_endpoint
     client_options = ConfigHelper.get_client_options(as_api_key, as_host_identifier, as_api_endpoint)
-    @static_client = ElasticAppSearch::Client.new(client_options)
+    @static_client = Elastic::AppSearch::Client.new(client_options)
     @static_client.create_engine(@static_engine_name)
 
     @document1 = { 'id' => '1', 'title' => 'The Great Gatsby' }
@@ -47,7 +47,7 @@ describe ElasticAppSearch::Client do
     end
 
     subject do
-      ElasticAppSearch::Client.create_signed_search_key(key, api_key_name, enforced_options)
+      Elastic::AppSearch::Client.create_signed_search_key(key, api_key_name, enforced_options)
     end
 
     it 'should build a valid jwt' do
@@ -65,7 +65,7 @@ describe ElasticAppSearch::Client do
         .with(
           :headers => {
             'X-Swiftype-Client' => 'elastic-app-search-ruby',
-            'X-Swiftype-Client-Version' => ElasticAppSearch::VERSION
+            'X-Swiftype-Client-Version' => Elastic::AppSearch::VERSION
           }
         )
     end
@@ -75,11 +75,11 @@ describe ElasticAppSearch::Client do
     let(:document) { { 'url' => 'http://www.youtube.com/watch?v=v1uyQZNg2vE' } }
 
     before do
-      client.create_engine(engine_name) rescue ElasticAppSearch::BadRequest
+      client.create_engine(engine_name) rescue Elastic::AppSearch::BadRequest
     end
 
     after do
-      client.destroy_engine(engine_name) rescue ElasticAppSearch::NonExistentRecord
+      client.destroy_engine(engine_name) rescue Elastic::AppSearch::NonExistentRecord
     end
 
     describe '#index_document' do
@@ -104,7 +104,7 @@ describe ElasticAppSearch::Client do
         it 'should raise an error when the API returns errors in the response' do
           expect do
             subject
-          end.to raise_error(ElasticAppSearch::InvalidDocument, /Invalid field/)
+          end.to raise_error(Elastic::AppSearch::InvalidDocument, /Invalid field/)
         end
       end
 
@@ -316,7 +316,7 @@ describe ElasticAppSearch::Client do
 
         it 'should throw an appropriate error' do
           expect { subject }.to raise_error do |e|
-            expect(e).to be_a(ElasticAppSearch::BadRequest)
+            expect(e).to be_a(Elastic::AppSearch::BadRequest)
             expect(e.errors).to eq(['Search fields contains invalid field: taco', 'Search fields contains invalid field: body'])
           end
         end
@@ -375,11 +375,11 @@ describe ElasticAppSearch::Client do
     } }
 
     before(:each) do
-      client.create_engine(engine_name) rescue ElasticAppSearch::BadRequest
+      client.create_engine(engine_name) rescue Elastic::AppSearch::BadRequest
     end
 
     after(:each) do
-      client.destroy_engine(engine_name) rescue ElasticAppSearch::NonExistentRecord
+      client.destroy_engine(engine_name) rescue Elastic::AppSearch::NonExistentRecord
     end
 
     describe '#show_settings' do
@@ -418,18 +418,18 @@ describe ElasticAppSearch::Client do
 
   context 'Engines' do
     after do
-      client.destroy_engine(engine_name) rescue ElasticAppSearch::NonExistentRecord
+      client.destroy_engine(engine_name) rescue Elastic::AppSearch::NonExistentRecord
     end
 
     context '#create_engine' do
       it 'should create an engine when given a right set of parameters' do
-        expect { client.get_engine(engine_name) }.to raise_error(ElasticAppSearch::NonExistentRecord)
+        expect { client.get_engine(engine_name) }.to raise_error(Elastic::AppSearch::NonExistentRecord)
         client.create_engine(engine_name)
         expect { client.get_engine(engine_name) }.to_not raise_error
       end
 
       it 'should accept an optional language parameter' do
-        expect { client.get_engine(engine_name) }.to raise_error(ElasticAppSearch::NonExistentRecord)
+        expect { client.get_engine(engine_name) }.to raise_error(Elastic::AppSearch::NonExistentRecord)
         client.create_engine(engine_name, 'da')
         expect(client.get_engine(engine_name)).to match('name' => anything, 'type' => anything, 'language' => 'da')
       end
@@ -443,7 +443,7 @@ describe ElasticAppSearch::Client do
       it 'should return an error when the engine name has already been taken' do
         client.create_engine(engine_name)
         expect { client.create_engine(engine_name) }.to raise_error do |e|
-          expect(e).to be_a(ElasticAppSearch::BadRequest)
+          expect(e).to be_a(Elastic::AppSearch::BadRequest)
           expect(e.errors).to eq(['Name is already taken'])
         end
       end
@@ -475,11 +475,11 @@ describe ElasticAppSearch::Client do
         expect { client.get_engine(engine_name) }.to_not raise_error
 
         client.destroy_engine(engine_name)
-        expect { client.get_engine(engine_name) }.to raise_error(ElasticAppSearch::NonExistentRecord)
+        expect { client.get_engine(engine_name) }.to raise_error(Elastic::AppSearch::NonExistentRecord)
       end
 
       it 'should raise an error if the engine does not exist' do
-        expect { client.destroy_engine(engine_name) }.to raise_error(ElasticAppSearch::NonExistentRecord)
+        expect { client.destroy_engine(engine_name) }.to raise_error(Elastic::AppSearch::NonExistentRecord)
       end
     end
   end
@@ -487,12 +487,12 @@ describe ElasticAppSearch::Client do
   context 'Configuration' do
     context 'host_identifier' do
       it 'sets the base url correctly' do
-        client = ElasticAppSearch::Client.new(:host_identifier => 'host-asdf', :api_key => 'foo')
+        client = Elastic::AppSearch::Client.new(:host_identifier => 'host-asdf', :api_key => 'foo')
         expect(client.api_endpoint).to eq('https://host-asdf.api.swiftype.com/api/as/v1/')
       end
 
       it 'sets the base url correctly using deprecated as_host_key' do
-        client = ElasticAppSearch::Client.new(:account_host_key => 'host-asdf', :api_key => 'foo')
+        client = Elastic::AppSearch::Client.new(:account_host_key => 'host-asdf', :api_key => 'foo')
         expect(client.api_endpoint).to eq('https://host-asdf.api.swiftype.com/api/as/v1/')
       end
     end

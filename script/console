@@ -2,7 +2,7 @@
 
 $:.unshift File.expand_path('../../lib', __FILE__)
 
-require 'elastic-app-search'
+require 'elastic/app-search'
 require 'irb'
 require 'irb/completion'
 
