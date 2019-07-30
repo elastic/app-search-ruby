@@ -2,7 +2,7 @@
 
 $:.unshift File.expand_path('../../lib', __FILE__)
 
-require 'swiftype-app-search'
+require 'elastic/app-search'
 require 'irb'
 require 'irb/completion'
 
