@@ -1,7 +1,6 @@
 <p align="center"><img src="https://github.com/elastic/app-search-ruby/blob/master/logo-app-search.png?raw=true" alt="Elastic App Search Logo"></p>
 
-<p align="center"><a href="https://circleci.com/gh/elastic/app-search-ruby"><img src="https://circleci.com/gh/elastic/app-search-ruby.svg?style=svg" alt="CircleCI build"></a>
-<a href="https://github.com/elastic/app-search-ruby/releases"><img src="https://img.shields.io/github/release/elastic/app-search-ruby/all.svg?style=flat-square" alt="GitHub release" /></a></p>
+<p align="center"><a href="https://circleci.com/gh/elastic/app-search-ruby"><img src="https://circleci.com/gh/elastic/app-search-ruby.svg?style=svg" alt="CircleCI build"></a></p>
 
 > A first-party Ruby client for building excellent, relevant search experiences with Elastic App Search.
 
