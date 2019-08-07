@@ -21,10 +21,10 @@
 To install the gem, execute:
 
 ```bash
-gem install elastic-app-search-ruby
+gem install elastic-app-search
 ```
 
-Or place `gem 'elastic-app-search-ruby', '~> 0.6.0'` in your `Gemfile` and run `bundle install`.
+Or place `gem 'elastic-app-search', '~> 0.7.0'` in your `Gemfile` and run `bundle install`.
 
 ## Usage
 
