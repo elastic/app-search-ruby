@@ -2,17 +2,20 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2
+version: 2.1
+
+executors:
+  ruby-24: { docker: [{ image: "ruby:2.4" }] }
+  ruby-25: { docker: [{ image: "ruby:2.5" }] }
+  ruby-26: { docker: [{ image: "ruby:2.6" }] }
+  jruby-92: { docker: [{ image: "jruby:9.2.7-jdk" }] }
+
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-       - image: circleci/ruby:2.4.1-node-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+    parameters:
+      executor:
+        type: executor
+    executor: << parameters.executor >>
 
     working_directory: ~/repo
 
@@ -22,9 +25,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "Gemfile" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run:
           name: install dependencies
@@ -54,3 +57,25 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+
+workflows:
+  run-tests:
+    jobs:
+      - build:
+          name: run-tests-ruby-2.4
+          executor: ruby-24
+      - build:
+          name: run-tests-ruby-2.5
+          executor: ruby-25
+          requires:
+            - run-tests-ruby-2.4
+      - build:
+          name: run-tests-ruby-2.6
+          executor: ruby-26
+          requires:
+            - run-tests-ruby-2.5
+      - build:
+          name: run-tests-jruby-92
+          executor: jruby-92
+          requires:
+            - run-tests-ruby-2.6
