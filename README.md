@@ -263,7 +263,7 @@ engine_name = 'favorite-videos'
 client.reset_settings(engine_name)
 ```
 
-### Create a Signed Search Key
+#### Create a Signed Search Key
 
 Creating a search key that will only return the title field.
 
