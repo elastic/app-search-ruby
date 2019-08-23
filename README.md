@@ -25,7 +25,7 @@ To install the gem, execute:
 gem install elastic-app-search
 ```
 
-Or place `gem 'elastic-app-search', '~> 7.2.0'` in your `Gemfile` and run `bundle install`.
+Or place `gem 'elastic-app-search', '~> 7.3.0'` in your `Gemfile` and run `bundle install`.
 
 ## Versioning
 
