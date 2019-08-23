@@ -263,6 +263,24 @@ engine_name = 'favorite-videos'
 client.reset_settings(engine_name)
 ```
 
+#### Create a Signed Search Key
+
+Creating a search key that will only return the title field.
+
+```ruby
+public_search_key = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
+public_search_key_name = 'search-key'
+enforced_options = {
+  result_fields: { title: { raw: {} } },
+  filters: { world_heritage_site: 'true' }
+}
+
+signed_search_key = Elastic::AppSearch::Client.create_signed_search_key(public_search_key, public_search_key_name, enforced_options)
+
+client = Elastic::AppSearch::Client.new(host_identifier: 'host-c5s2mj', api_key: signed_search_key)
+client.search('national-parks-demo', 'everglade')
+```
+
 ## Running Tests
 
 ```bash
