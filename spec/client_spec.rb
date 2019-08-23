@@ -1,7 +1,8 @@
 require 'config_helper'
+require 'securerandom'
 
 describe Elastic::AppSearch::Client do
-  let(:engine_name) { "ruby-client-test-#{Time.now.to_i}" }
+  let(:engine_name) { "ruby-client-test-#{SecureRandom.hex}" }
 
   include_context 'App Search Credentials'
   let(:client) { Elastic::AppSearch::Client.new(client_options) }
@@ -9,7 +10,7 @@ describe Elastic::AppSearch::Client do
   before(:all) do
     # Bootstraps a static engine for 'read-only' options that require indexing
     # across the test suite
-    @static_engine_name = "ruby-client-test-static-#{Time.now.to_i}"
+    @static_engine_name = "ruby-client-test-static-#{SecureRandom.hex}"
     as_api_key = ConfigHelper.get_as_api_key
     as_host_identifier = ConfigHelper.get_as_host_identifier
     as_api_endpoint = ConfigHelper.get_as_api_endpoint
