@@ -268,14 +268,14 @@ client.reset_settings(engine_name)
 Creating a search key that will only return the title field.
 
 ```ruby
-read_only_api_key = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
-api_key_name = 'search-key'
+public_search_key = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
+public_search_key_name = 'search-key'
 enforced_options = {
   result_fields: { title: { raw: {} } },
   filters: { world_heritage_site: 'true' }
 }
 
-signed_search_key = Elastic::AppSearch::Client.create_signed_search_key(read_only_api_key, api_key_name, enforced_options)
+signed_search_key = Elastic::AppSearch::Client.create_signed_search_key(public_search_key, public_search_key_name, enforced_options)
 
 client = Elastic::AppSearch::Client.new(host_identifier: 'host-c5s2mj', api_key: signed_search_key)
 client.search('national-parks-demo', 'everglade')
