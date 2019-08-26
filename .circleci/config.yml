@@ -61,21 +61,7 @@ jobs:
 workflows:
   run-tests:
     jobs:
-      - build:
-          name: run-tests-ruby-2.4
-          executor: ruby-24
-      - build:
-          name: run-tests-ruby-2.5
-          executor: ruby-25
-          requires:
-            - run-tests-ruby-2.4
-      - build:
-          name: run-tests-ruby-2.6
-          executor: ruby-26
-          requires:
-            - run-tests-ruby-2.5
-      - build:
-          name: run-tests-jruby-92
-          executor: jruby-92
-          requires:
-            - run-tests-ruby-2.6
+      - build: { name: run-tests-ruby-2.4, executor: ruby-24 }
+      - build: { name: run-tests-ruby-2.5, executor: ruby-25 }
+      - build: { name: run-tests-ruby-2.6, executor: ruby-26 }
+      - build: { name: run-tests-jruby-92, executor: jruby-92 }
