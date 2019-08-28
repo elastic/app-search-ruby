@@ -7,7 +7,7 @@ module Elastic
         errors_value = response['errors']
         return errors_value if errors_value && errors_value.is_a?(Array)
         return [errors_value] if errors_value && !errors_value.is_a?(Array)
-        return [response]
+        [response]
       end
 
       def initialize(response)
