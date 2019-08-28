@@ -4,24 +4,14 @@ module Elastic
       attr_reader :errors
 
       def extract_messages(response)
-        if response['errors']
-          if response['errors'].is_a?(Array)
-           return response['errors']
-          else
-           return [response['errors']]
-          end
-        else
-         return [response]
-        end
+        errors_value = response['errors']
+        return errors_value if errors_value && errors_value.is_a?(Array)
+        return [errors_value] if errors_value && !errors_value.is_a?(Array)
+        return [response]
       end
 
       def initialize(response)
-        if response.is_a?(Array)
-          @errors = response.flat_map { |r| extract_messages(r) }
-        else
-          @errors = extract_messages(response)
-        end
-
+        @errors = response.is_a?(Array) ? response.flat_map { |r| extract_messages(r) } : extract_messages(response)
         message = (errors.size == 1) ? "Error: #{errors.first}" : "Errors: #{errors.inspect}"
         super(message)
       end
