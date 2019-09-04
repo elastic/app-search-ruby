@@ -3,13 +3,16 @@ module Elastic
     class ClientException < StandardError
       attr_reader :errors
 
+      def extract_messages(response)
+        errors_value = response['errors']
+        return errors_value if errors_value && errors_value.is_a?(Array)
+        return [errors_value] if errors_value && !errors_value.is_a?(Array)
+        [response]
+      end
+
       def initialize(response)
-        @errors = if response.is_a?(Array)
-          response.flat_map { |r| r['errors'] }
-        else
-          response['errors'] || [response]
-        end
-        message = (errors.count == 1) ? "Error: #{errors.first}" : "Errors: #{errors.inspect}"
+        @errors = response.is_a?(Array) ? response.flat_map { |r| extract_messages(r) } : extract_messages(response)
+        message = (errors.size == 1) ? "Error: #{errors.first}" : "Errors: #{errors.inspect}"
         super(message)
       end
     end
