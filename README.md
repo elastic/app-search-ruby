@@ -48,7 +48,7 @@ It also requires a valid `[API_KEY]`, which authenticates requests to the API. Y
 You can find your `[API_KEY]` and your `[HOST_IDENTIFIER]` within the [Credentials](https://app.swiftype.com/as/credentials) menu:
 
 ```ruby
-require 'elastic/app-search'
+require 'elastic-app-search'
 
 client = Elastic::AppSearch::Client.new(:host_identifier => 'host-c5s2mj', :api_key => 'private-mu75psc5egt9ppzuycnc2mc3')
 ```
@@ -60,7 +60,7 @@ The client can be configured to use a managed deploy by using the
 , it can be omitted.
 
 ```ruby
-require 'elastic/app-search'
+require 'elastic-app-search'
 
 client = Elastic::AppSearch::Client.new(:api_key => 'private-mu75psc5egt9ppzuycnc2mc3', :api_endpoint => 'http://localhost:3002/api/as/v1/')
 ```
