@@ -292,6 +292,90 @@ client = Elastic::AppSearch::Client.new(host_identifier: 'host-c5s2mj', api_key:
 client.search('national-parks-demo', 'everglade')
 ```
 
+#### Log click-through
+
+Logging a click through
+
+```ruby
+engine_name = 'favorite-videos'
+
+options = {
+  :query => "cat videos",
+  :document_id => "INscMGmhmX4",
+  :request_id => "e4c4dea0bd7ad3d2f676575ef16dc7d2",
+  :tags => ["firefox", "web browser"]
+}
+
+client.logClickthrough(engine_name, options)
+```
+
+#### Analytics - Number of clicks-throughs received by a document
+
+```ruby
+engine_name = 'favorite-videos'
+
+options = {
+  :query => "cats",
+  :page => {
+    :size => 20,
+  },
+  :filters => {
+    :date => {
+      :from => "2019-04-11T00:00:00+00:00",
+      :to => "2019-04-13T00:00:00+00:00"
+    }
+  }
+}
+client.getTopClicksAnalytics(engine_name, options)
+```
+
+#### Analytics - Queries, number of queries, and clicks received
+
+```ruby
+engine_name = 'favorite-videos'
+
+options = {
+  :query => "cats",
+  :page => {
+    :size => 20,
+  },
+  :filters => {
+    :date => {
+      :from => "2019-04-11T00:00:00+00:00",
+      :to => "2019-04-13T00:00:00+00:00"
+    }
+  }
+}
+client.getTopClicksAnalytics(engine_name, options)
+```
+
+#### Analytics - Number of clicks and total number of queries
+
+```ruby
+engine_name = 'favorite-videos'
+
+options = {
+  :filters => {
+    :all => [
+      {
+        :tag => ["mobile", "web"]
+      },{
+        :query => "cats"
+      }, {
+        :document_id => "163"
+      }, {
+        :date => {
+          :from => "2018-07-05T12:00:00+00:00",
+          :to => "2018-07-05T14:00:00+00:00"
+        }
+      }
+    ]
+  },
+  :interval => "hour"
+}
+client.getCountAnalytics(engine_name, options)
+```
+
 ## Running Tests
 
 ```bash

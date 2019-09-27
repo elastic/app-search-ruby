@@ -7,8 +7,9 @@ module Elastic
   module AppSearch
     # API client for the {Elastic App Search API}[https://www.elastic.co/cloud/app-search-service].
     class Client
-      autoload :Documents, 'elastic/app-search/client/documents'
+      autoload :Analytics, 'elastic/app-search/client/analytics'
       autoload :Click, 'elastic/app-search/client/click'
+      autoload :Documents, 'elastic/app-search/client/documents'
       autoload :Engines, 'elastic/app-search/client/engines'
       autoload :Search, 'elastic/app-search/client/search'
       autoload :SearchSettings, 'elastic/app-search/client/search_settings'
@@ -57,8 +58,9 @@ module Elastic
         end
       end
 
-      include Elastic::AppSearch::Client::Documents
+      include Elastic::AppSearch::Client::Analytics
       include Elastic::AppSearch::Client::Click
+      include Elastic::AppSearch::Client::Documents
       include Elastic::AppSearch::Client::Engines
       include Elastic::AppSearch::Client::Search
       include Elastic::AppSearch::Client::SearchSettings
