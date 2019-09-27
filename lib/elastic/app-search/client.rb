@@ -8,10 +8,11 @@ module Elastic
     # API client for the {Elastic App Search API}[https://www.elastic.co/cloud/app-search-service].
     class Client
       autoload :Documents, 'elastic/app-search/client/documents'
+      autoload :Click, 'elastic/app-search/client/click'
       autoload :Engines, 'elastic/app-search/client/engines'
       autoload :Search, 'elastic/app-search/client/search'
-      autoload :QuerySuggestion, 'elastic/app-search/client/query_suggestion'
       autoload :SearchSettings, 'elastic/app-search/client/search_settings'
+      autoload :QuerySuggestion, 'elastic/app-search/client/query_suggestion'
 
       DEFAULT_TIMEOUT = 15
 
@@ -57,11 +58,12 @@ module Elastic
       end
 
       include Elastic::AppSearch::Client::Documents
+      include Elastic::AppSearch::Client::Click
       include Elastic::AppSearch::Client::Engines
       include Elastic::AppSearch::Client::Search
+      include Elastic::AppSearch::Client::SearchSettings
       include Elastic::AppSearch::Client::SignedSearchOptions
       include Elastic::AppSearch::Client::QuerySuggestion
-      include Elastic::AppSearch::Client::SearchSettings
     end
   end
 end

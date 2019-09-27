@@ -21,6 +21,11 @@ module Elastic
         def destroy_engine(engine_name)
           delete("engines/#{engine_name}")
         end
+
+        def update_documents(engine_name, documents)
+          documents.map! { |document| normalize_document(document) }
+          patch("engines/#{engine_name}/documents", documents)
+        end
       end
     end
   end
