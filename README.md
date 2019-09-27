@@ -376,6 +376,46 @@ options = {
 client.getCountAnalytics(engine_name, options)
 ```
 
+#### Creating Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.create_synonym_set(engine_name, ['park', 'trail'])
+```
+
+#### Retrieving Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.get_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c')
+```
+
+#### Listing Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.list_synonym_sets(engine_name, :current => 1, :size => 20)
+```
+
+#### Updating Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.update_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c', ['park', 'trail', 'ground'])
+```
+
+#### Destroying Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.destroy_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c')
+```
+
 ## Running Tests
 
 ```bash

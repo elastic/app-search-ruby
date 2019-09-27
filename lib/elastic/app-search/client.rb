@@ -13,6 +13,7 @@ module Elastic
       autoload :Engines, 'elastic/app-search/client/engines'
       autoload :Search, 'elastic/app-search/client/search'
       autoload :SearchSettings, 'elastic/app-search/client/search_settings'
+      autoload :Synonyms, 'elastic/app-search/client/synonyms'
       autoload :QuerySuggestion, 'elastic/app-search/client/query_suggestion'
 
       DEFAULT_TIMEOUT = 15
@@ -65,6 +66,7 @@ module Elastic
       include Elastic::AppSearch::Client::Search
       include Elastic::AppSearch::Client::SearchSettings
       include Elastic::AppSearch::Client::SignedSearchOptions
+      include Elastic::AppSearch::Client::Synonyms
       include Elastic::AppSearch::Client::QuerySuggestion
     end
   end
