@@ -9,6 +9,7 @@ module Elastic
     class Client
       autoload :Analytics, 'elastic/app-search/client/analytics'
       autoload :Click, 'elastic/app-search/client/click'
+      autoload :Credentials, 'elastic/app-search/client/credentials'
       autoload :Documents, 'elastic/app-search/client/documents'
       autoload :Engines, 'elastic/app-search/client/engines'
       autoload :Search, 'elastic/app-search/client/search'
@@ -61,6 +62,7 @@ module Elastic
 
       include Elastic::AppSearch::Client::Analytics
       include Elastic::AppSearch::Client::Click
+      include Elastic::AppSearch::Client::Credentials
       include Elastic::AppSearch::Client::Documents
       include Elastic::AppSearch::Client::Engines
       include Elastic::AppSearch::Client::Search

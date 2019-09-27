@@ -416,6 +416,50 @@ engine_name = 'us-national-parks'
 client.destroy_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c')
 ```
 
+#### Listing Credentials
+
+```ruby
+client.list_credentials(:current => 1, :size => 20)
+```
+
+#### Creating Credentials
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.create_credential({
+  :name => "reading-private-key",
+  :type => "private",
+  :read => true,
+  :write => false,
+  :access_all_engines => false,
+  :engines => [
+    "favorite-videos"
+  ]
+})
+```
+
+#### Updating Credentials
+
+```ruby
+client.update_credential('reading-private-key', {
+  :name => "reading-private-key",
+  :type => "private",
+  :read => true,
+  :write => true,
+  :access_all_engines => false,
+  :engines => [
+    "favorite-videos"
+  ]
+})
+```
+
+#### Destroying Credentials
+
+```ruby
+client.destroy_credential('reading-private-key')
+```
+
 ## Running Tests
 
 ```bash
