@@ -28,6 +28,7 @@ module Elastic
         def destroy_curation(engine_name, id)
           delete("engines/#{engine_name}/curations/#{id}")
         end
+
       end
     end
   end

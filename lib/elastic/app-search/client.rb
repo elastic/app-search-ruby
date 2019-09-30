@@ -13,6 +13,7 @@ module Elastic
       autoload :Curations, 'elastic/app-search/client/curations'
       autoload :Documents, 'elastic/app-search/client/documents'
       autoload :Engines, 'elastic/app-search/client/engines'
+      autoload :Logs, 'elastic/app-search/client/logs'
       autoload :Schema, 'elastic/app-search/client/schema'
       autoload :Search, 'elastic/app-search/client/search'
       autoload :SearchSettings, 'elastic/app-search/client/search_settings'
@@ -68,6 +69,7 @@ module Elastic
       include Elastic::AppSearch::Client::Curations
       include Elastic::AppSearch::Client::Documents
       include Elastic::AppSearch::Client::Engines
+      include Elastic::AppSearch::Client::Logs
       include Elastic::AppSearch::Client::Schema
       include Elastic::AppSearch::Client::Search
       include Elastic::AppSearch::Client::SearchSettings

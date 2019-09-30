@@ -537,6 +537,28 @@ export AS_HOST_IDENTIFIER="[HOST_IDENTIFIER]"
 bundle exec rspec
 ````
 
+#### Retrieving API Logs
+
+```ruby
+engine_name = 'us-national-parks'
+options = {
+  'filters' => {
+    'date' => {
+      'from' => '2019-09-23T00:00:00+00:00',
+      'to' => '2019-09-28T00:00:00+00:00'
+    }
+  },
+  'page' => {
+    'total_results' => 100,
+    'size' => 20
+  },
+  'query' => 'search',
+  'sort_direction' => 'desc'
+}
+
+client.get_api_logs(engine_name, options)
+```
+
 You can also run tests against a local environment by passing a `AS_API_ENDPOINT` environment variable
 
 ```bash
