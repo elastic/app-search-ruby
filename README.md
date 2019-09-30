@@ -302,7 +302,7 @@ options = {
   :tags => ['firefox', 'web browser']
 }
 
-client.logClickthrough(engine_name, options)
+client.log_click_through(engine_name, options)
 ```
 
 #### Analytics - Number of clicks-throughs received by a document

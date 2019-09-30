@@ -5,7 +5,7 @@ module Elastic
       module Click
 
         # Send data about clicked results.
-        def logClickthrough(engine_name, options)
+        def log_click_through(engine_name, options)
           post("engines/#{engine_name}/documents", options)
         end
 

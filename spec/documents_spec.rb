@@ -7,14 +7,6 @@ describe Elastic::AppSearch::Client::Documents do
   context 'Documents' do
     let(:document) { { 'url' => 'http://www.youtube.com/watch?v=v1uyQZNg2vE' } }
 
-    before do
-      client.create_engine(engine_name) rescue Elastic::AppSearch::BadRequest
-    end
-
-    after do
-      client.destroy_engine(engine_name) rescue Elastic::AppSearch::NonExistentRecord
-    end
-
     describe '#index_document' do
       subject { client.index_document(engine_name, document) }
 
