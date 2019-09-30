@@ -322,7 +322,7 @@ options = {
   }
 }
 
-client.getTopClicksAnalytics(engine_name, options)
+client.get_top_clicks_analytics(engine_name, options)
 ```
 
 #### Analytics - Queries, number of queries, and clicks received
@@ -342,7 +342,7 @@ options = {
   }
 }
 
-client.getTopClicksAnalytics(engine_name, options)
+client.get_top_queries_analytics(engine_name, options)
 ```
 
 #### Analytics - Number of clicks and total number of queries

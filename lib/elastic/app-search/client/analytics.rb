@@ -5,12 +5,12 @@ module Elastic
       module Analytics
 
         # Returns the number of clicks received by a document in descending order.
-        def getTopClicksAnalytics(engine_name, options)
+        def get_top_clicks_analytics(engine_name, options)
           post("engines/#{engine_name}/analytics/clicks", options)
         end
 
         # Returns queries anlaytics by usage count
-        def getTopQueriesAnalytics(engine_name, options)
+        def get_top_queries_analytics(engine_name, options)
           post("engines/#{engine_name}/analytics/queries", options)
         end
 
