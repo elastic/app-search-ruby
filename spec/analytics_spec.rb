@@ -4,29 +4,79 @@ describe Elastic::AppSearch::Client::Analytics do
 
   let(:client) { Elastic::AppSearch::Client.new(client_options) }
 
-  context '#log_click_through' do
-    let(:documents_response) do
-      client.index_documents(engine_name, documents)
-    end
-    let(:documents) { [first_document, second_document] }
-    let(:request_id) { 'id' }
-    let(:first_document_id) { 'id' }
-    let(:first_document) { { 'id' => first_document_id } }
-    let(:second_document_id) { 'another_id' }
-    let(:second_document) { { 'id' => second_document_id } }
-
+  context '#get_top_clicks_analytics' do
     subject do
-      client.log_click_through(
+      client.get_top_clicks_analytics(
         engine_name,
-        :query => 'cat videos',
-        :document_id => first_document_id,
-        :request_id => 'e4c4dea0bd7ad3d2f676575ef16dc7d2',
-        :tags => ['firefox', 'web browser']
+        :query => 'cats',
+        :page => {
+          :size => 20,
+        },
+        :filters => {
+          :date => {
+            :from => Time.now.iso8601,
+            :to => Time.now.iso8601
+          }
+        }
       )
     end
 
-    it 'will log a click' do
-      expect(subject[0]['id']).not_to be_empty
+    it 'will query for analytics' do
+      expect(subject['results']).to(eq([]))
+    end
+  end
+
+  context '#get_top_queries_analytics' do
+    subject do
+      client.get_top_queries_analytics(
+        engine_name,
+        :page => {
+          :size => 20
+        },
+        :filters => {
+          :date => {
+            :from => Time.now.iso8601,
+            :to => Time.now.iso8601
+          }
+        }
+      )
+    end
+
+    it 'will query for analytics' do
+      expect(subject['results']).to(eq([]))
+    end
+  end
+
+  context '#get_count_analytics' do
+    let(:from) { Time.now.iso8601 }
+    let(:to) { Time.now.iso8601 }
+
+    subject do
+      client.get_count_analytics(
+        engine_name,
+        :filters => {
+          :all => [
+            {
+              :tag => ['mobile', 'web']
+            }, {
+              :query => 'cats'
+            }, {
+              :document_id => '163'
+            }, {
+              :date => {
+                :from => from,
+                :to => to
+              }
+            }
+          ]
+        },
+        :interval => 'hour'
+      )
+    end
+
+    it 'will query for analytics' do
+      expect(subject['results'][0]['clicks']).to eq(0)
+      expect(subject['results'][0]['queries']).to eq(0)
     end
   end
 end

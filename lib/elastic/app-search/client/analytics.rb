@@ -15,7 +15,7 @@ module Elastic
         end
 
         # Returns the number of clicks and total number of queries over a period.
-        def getCountAnalytics(engine_name, options)
+        def get_count_analytics(engine_name, options)
           post("engines/#{engine_name}/analytics/counts", options)
         end
 

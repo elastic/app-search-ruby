@@ -330,9 +330,8 @@ client.get_top_clicks_analytics(engine_name, options)
 ```ruby
 engine_name = 'favorite-videos'
 options = {
-  :query => 'cats',
   :page => {
-    :size => 20,
+    :size => 20
   },
   :filters => {
     :date => {
@@ -369,7 +368,7 @@ options = {
   :interval => 'hour'
 }
 
-client.getCountAnalytics(engine_name, options)
+client.get_count_analytics(engine_name, options)
 ```
 
 #### Creating Synonym Sets
