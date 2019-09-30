@@ -425,8 +425,6 @@ client.list_credentials(:current => 1, :size => 20)
 #### Creating Credentials
 
 ```ruby
-engine_name = 'us-national-parks'
-
 client.create_credential({
   :name => "reading-private-key",
   :type => "private",
@@ -458,6 +456,22 @@ client.update_credential('reading-private-key', {
 
 ```ruby
 client.destroy_credential('reading-private-key')
+```
+
+#### Retrieving an Engine's Schema
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.get_schema(engine_name)
+```
+
+#### Updating an Engine's Schema
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.update_schema(engine_name, "square_km" => "number")
 ```
 
 ## Running Tests

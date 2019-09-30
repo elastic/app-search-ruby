@@ -12,6 +12,7 @@ module Elastic
       autoload :Credentials, 'elastic/app-search/client/credentials'
       autoload :Documents, 'elastic/app-search/client/documents'
       autoload :Engines, 'elastic/app-search/client/engines'
+      autoload :Schema, 'elastic/app-search/client/schema'
       autoload :Search, 'elastic/app-search/client/search'
       autoload :SearchSettings, 'elastic/app-search/client/search_settings'
       autoload :Synonyms, 'elastic/app-search/client/synonyms'
@@ -65,6 +66,7 @@ module Elastic
       include Elastic::AppSearch::Client::Credentials
       include Elastic::AppSearch::Client::Documents
       include Elastic::AppSearch::Client::Engines
+      include Elastic::AppSearch::Client::Schema
       include Elastic::AppSearch::Client::Search
       include Elastic::AppSearch::Client::SearchSettings
       include Elastic::AppSearch::Client::SignedSearchOptions
