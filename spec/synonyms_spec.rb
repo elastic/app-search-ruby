@@ -1,4 +1,4 @@
-describe Elastic::AppSearch::Client::SearchSettings do
+describe Elastic::AppSearch::Client::Synonyms do
   include_context 'App Search Credentials'
   include_context 'Test Engine'
 
