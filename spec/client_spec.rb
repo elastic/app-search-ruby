@@ -2,41 +2,8 @@ require 'config_helper'
 require 'securerandom'
 
 describe Elastic::AppSearch::Client do
-  let(:engine_name) { "ruby-client-test-#{SecureRandom.hex}" }
-
   include_context 'App Search Credentials'
   let(:client) { Elastic::AppSearch::Client.new(client_options) }
-
-  before(:all) do
-    # Bootstraps a static engine for 'read-only' options that require indexing
-    # across the test suite
-    @static_engine_name = "ruby-client-test-static-#{SecureRandom.hex}"
-    as_api_key = ConfigHelper.get_as_api_key
-    as_host_identifier = ConfigHelper.get_as_host_identifier
-    as_api_endpoint = ConfigHelper.get_as_api_endpoint
-    client_options = ConfigHelper.get_client_options(as_api_key, as_host_identifier, as_api_endpoint)
-    @static_client = Elastic::AppSearch::Client.new(client_options)
-    @static_client.create_engine(@static_engine_name)
-
-    @document1 = { 'id' => '1', 'title' => 'The Great Gatsby' }
-    @document2 = { 'id' => '2', 'title' => 'Catcher in the Rye' }
-    @documents = [@document1, @document2]
-    @static_client.index_documents(@static_engine_name, @documents)
-
-    # Wait until documents are indexed
-    start = Time.now
-    ready = false
-    until (ready)
-      sleep(3)
-      results = @static_client.search(@static_engine_name, '')
-      ready = true if results['results'].length == 2
-      ready = true if (Time.now - start).to_i >= 120 # Time out after 2 minutes
-    end
-  end
-
-  after(:all) do
-    @static_client.destroy_engine(@static_engine_name)
-  end
 
   describe '#create_signed_search_key' do
     let(:key) { 'private-xxxxxxxxxxxxxxxxxxxx' }

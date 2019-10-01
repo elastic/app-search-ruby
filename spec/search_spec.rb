@@ -1,10 +1,12 @@
 describe Elastic::AppSearch::Client::Search do
   include_context 'App Search Credentials'
-  include_context 'Static client'
+  include_context 'Static Test Engine'
+
+  let(:client) { Elastic::AppSearch::Client.new(client_options) }
 
   context 'Search' do
     describe '#search' do
-      subject { @static_client.search(@static_engine_name, query, options) }
+      subject { client.search(engine_name, query, options) }
       let(:query) { '' }
       let(:options) { { 'page' => { 'size' => 2 } } }
 
@@ -17,7 +19,7 @@ describe Elastic::AppSearch::Client::Search do
     end
 
     describe '#multi_search' do
-      subject { @static_client.multi_search(@static_engine_name, queries) }
+      subject { client.multi_search(engine_name, queries) }
 
       context 'when options are provided' do
         let(:queries) do

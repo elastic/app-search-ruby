@@ -1,6 +1,8 @@
 describe Elastic::AppSearch::Client::Curations do
   include_context 'App Search Credentials'
-  include_context 'Static client'
+  include_context 'Static Test Engine'
+
+  let(:client) { Elastic::AppSearch::Client.new(client_options) }
 
   let(:curation) do
     {
@@ -8,18 +10,18 @@ describe Elastic::AppSearch::Client::Curations do
         'zion'
       ],
       'promoted' => [
-        @document1['id']
+        document1['id']
       ],
       'hidden' => [
-        @document2['id']
+        document2['id']
       ]
     }
   end
-  let(:curation_id) { @static_client.create_curation(@static_engine_name, curation)['id'] }
+  let(:curation_id) { client.create_curation(engine_name, curation)['id'] }
 
   after(:each) do
     begin
-      @static_client.destroy_curation(@static_engine_name, curation_id)
+      client.destroy_curation(engine_name, curation_id)
     rescue
       # Ignore it
     end
@@ -32,7 +34,7 @@ describe Elastic::AppSearch::Client::Curations do
   end
 
   context '#get_curation' do
-    subject { @static_client.get_curation(@static_engine_name, curation_id) }
+    subject { client.get_curation(engine_name, curation_id) }
 
     it 'will retrieve a curation' do
       expect(subject['queries']).to(eq(['zion']))
@@ -46,11 +48,11 @@ describe Elastic::AppSearch::Client::Curations do
           'zion', 'lion'
         ],
         'promoted' => [
-          @document1['id']
+          document1['id']
         ]
       }
     end
-    subject { @static_client.update_curation(@static_engine_name, curation_id, updated_curation) }
+    subject { client.update_curation(engine_name, curation_id, updated_curation) }
 
     it 'will update a curation' do
       expect(subject['id']).to(eq(curation_id))
@@ -58,7 +60,7 @@ describe Elastic::AppSearch::Client::Curations do
   end
 
   context '#list_curations' do
-    subject { @static_client.list_curations(@static_engine_name, :current => 1, :size => 5) }
+    subject { client.list_curations(engine_name, :current => 1, :size => 5) }
 
     it 'will list curations' do
       expect(subject['results']).to(eq([]))
@@ -71,7 +73,7 @@ describe Elastic::AppSearch::Client::Curations do
   end
 
   context '#destroy_curation' do
-    subject { @static_client.destroy_curation(@static_engine_name, curation_id) }
+    subject { client.destroy_curation(engine_name, curation_id) }
 
     it 'will destroy a curation' do
       expect(subject['deleted']).to eq(true)

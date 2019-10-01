@@ -1,6 +1,8 @@
 describe Elastic::AppSearch::Client::Search do
   include_context 'App Search Credentials'
-  include_context 'Static client'
+  include_context 'Static Test Engine'
+
+  let(:client) { Elastic::AppSearch::Client.new(client_options) }
 
   context 'QuerySuggest' do
     describe '#query_suggestion' do
@@ -8,7 +10,7 @@ describe Elastic::AppSearch::Client::Search do
       let(:options) { { :size => 3, :types => { :documents => { :fields => ['title'] } } } }
 
       context 'when options are provided' do
-        subject { @static_client.query_suggestion(@static_engine_name, query, options) }
+        subject { client.query_suggestion(engine_name, query, options) }
 
         it 'should request query suggestions' do
           expect(subject).to match(
@@ -19,7 +21,7 @@ describe Elastic::AppSearch::Client::Search do
       end
 
       context 'when options are omitted' do
-        subject { @static_client.query_suggestion(@static_engine_name, query) }
+        subject { client.query_suggestion(engine_name, query) }
 
         it 'should request query suggestions' do
           expect(subject).to match(

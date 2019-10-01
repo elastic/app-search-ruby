@@ -8,10 +8,15 @@ require 'securerandom'
 
 WebMock.allow_net_connect!
 
-RSpec.shared_context 'Static client' do
+#
+# Uses a static engine that will not change between tests. It comes preloaded
+# with documents that *are already indexed*. This means tests can run operations
+# that require documents to be indexed, like "search".
+#
+# This is optimal for tests that perform read-only operations, like "search".
+#
+RSpec.shared_context 'Static Test Engine' do
   before(:all) do
-    # Bootstraps a static engine for 'read-only' options that require indexing
-    # across the test suite
     @static_engine_name = "ruby-client-test-static-#{SecureRandom.hex}"
     as_api_key = ConfigHelper.get_as_api_key
     as_host_identifier = ConfigHelper.get_as_host_identifier
@@ -35,6 +40,10 @@ RSpec.shared_context 'Static client' do
       ready = true if (Time.now - start).to_i >= 120 # Time out after 2 minutes
     end
   end
+
+  let(:engine_name) { @static_engine_name }
+  let(:document1) { @document1 }
+  let(:document2) { @document2 }
 
   after(:all) do
     @static_client.destroy_engine(@static_engine_name)
