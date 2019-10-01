@@ -532,6 +532,7 @@ client.destroy_curation(engine_name, 'cur-5d9240d640caaeca6506b600')
 
 ```bash
 export AS_API_KEY="[API_KEY]"
+export AS_ADMIN_KEY="[ADMIN_API_KEY]"
 export AS_HOST_IDENTIFIER="[HOST_IDENTIFIER]"
 bundle exec rspec
 ````

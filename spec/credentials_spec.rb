@@ -1,7 +1,7 @@
 require 'securerandom'
 
-describe Elastic::AppSearch::Client::SearchSettings do
-  include_context 'App Search Credentials'
+describe Elastic::AppSearch::Client::Credentials do
+  include_context 'App Search Admin Credentials'
   include_context 'Test Engine'
 
   let(:client) { Elastic::AppSearch::Client.new(client_options) }
