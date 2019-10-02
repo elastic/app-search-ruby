@@ -23,12 +23,12 @@ describe Elastic::AppSearch::Client::Search do
 
       context 'when options are omitted' do
         subject { client.query_suggestion(engine_name, query) }
-        expected = {
-          'meta' => anything,
-          'results' => anything
-        }
 
         it 'should request query suggestions' do
+          expected = {
+            'meta' => anything,
+            'results' => anything
+          }
           expect(subject).to(match(expected))
         end
       end
