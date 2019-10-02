@@ -13,6 +13,7 @@ module Elastic
         def update_schema(engine_name, schema)
           post("engines/#{engine_name}/schema", schema)
         end
+
       end
     end
   end
