@@ -17,7 +17,7 @@ describe Elastic::AppSearch::Client::Schema do
     subject { client.update_schema(engine_name, 'square_km' => 'number') }
 
     it 'will update a schema' do
-      expect(subject).to eq('square_km' => 'number')
+      expect(subject).to(eq('square_km' => 'number'))
     end
   end
 end

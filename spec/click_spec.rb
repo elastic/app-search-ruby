@@ -5,9 +5,7 @@ describe Elastic::AppSearch::Client::Click do
   let(:client) { Elastic::AppSearch::Client.new(client_options) }
 
   context '#log_click_through' do
-    let(:documents_response) do
-      client.index_documents(engine_name, documents)
-    end
+    let(:documents_response) { client.index_documents(engine_name, documents) }
     let(:documents) { [first_document, second_document] }
     let(:request_id) { 'id' }
     let(:first_document_id) { 'id' }
@@ -26,7 +24,7 @@ describe Elastic::AppSearch::Client::Click do
     end
 
     it 'will log a click' do
-      expect(subject[0]['id']).not_to be_empty
+      expect(subject[0]['id']).not_to(be_empty)
     end
   end
 end

@@ -75,8 +75,8 @@ describe Elastic::AppSearch::Client::Analytics do
     end
 
     it 'will query for analytics' do
-      expect(subject['results'][0]['clicks']).to eq(0)
-      expect(subject['results'][0]['queries']).to eq(0)
+      expect(subject['results'][0]['clicks']).to(eq(0))
+      expect(subject['results'][0]['queries']).to(eq(0))
     end
   end
 end

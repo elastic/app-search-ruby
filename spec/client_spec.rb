@@ -19,9 +19,9 @@ describe Elastic::AppSearch::Client do
     end
 
     it 'should build a valid jwt' do
-      decoded_token = JWT.decode subject, key, true, { algorithm: 'HS256' }
-      expect(decoded_token[0]['api_key_name']).to eq(api_key_name)
-      expect(decoded_token[0]['query']).to eq('cat')
+      decoded_token = JWT.decode(subject, key, true, :algorithm => 'HS256')
+      expect(decoded_token[0]['api_key_name']).to(eq(api_key_name))
+      expect(decoded_token[0]['query']).to(eq('cat'))
     end
   end
 
@@ -29,13 +29,15 @@ describe Elastic::AppSearch::Client do
     it 'should include client name and version in headers' do
       stub_request(:any, "#{client_options[:host_identifier]}.api.swiftype.com/api/as/v1/engines")
       client.list_engines
-      expect(WebMock).to have_requested(:get, "https://#{client_options[:host_identifier]}.api.swiftype.com/api/as/v1/engines")
+      expect(WebMock).to(
+        have_requested(:get, "https://#{client_options[:host_identifier]}.api.swiftype.com/api/as/v1/engines")
         .with(
           :headers => {
             'X-Swiftype-Client' => 'elastic-app-search-ruby',
             'X-Swiftype-Client-Version' => Elastic::AppSearch::VERSION
           }
         )
+      )
     end
   end
 
@@ -43,12 +45,12 @@ describe Elastic::AppSearch::Client do
     context 'host_identifier' do
       it 'sets the base url correctly' do
         client = Elastic::AppSearch::Client.new(:host_identifier => 'host-asdf', :api_key => 'foo')
-        expect(client.api_endpoint).to eq('https://host-asdf.api.swiftype.com/api/as/v1/')
+        expect(client.api_endpoint).to(eq('https://host-asdf.api.swiftype.com/api/as/v1/'))
       end
 
       it 'sets the base url correctly using deprecated as_host_key' do
         client = Elastic::AppSearch::Client.new(:account_host_key => 'host-asdf', :api_key => 'foo')
-        expect(client.api_endpoint).to eq('https://host-asdf.api.swiftype.com/api/as/v1/')
+        expect(client.api_endpoint).to(eq('https://host-asdf.api.swiftype.com/api/as/v1/'))
       end
     end
   end

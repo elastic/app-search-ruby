@@ -76,7 +76,7 @@ describe Elastic::AppSearch::Client::Curations do
     subject { client.destroy_curation(engine_name, curation_id) }
 
     it 'will destroy a curation' do
-      expect(subject['deleted']).to eq(true)
+      expect(subject['deleted']).to(eq(true))
     end
   end
 end

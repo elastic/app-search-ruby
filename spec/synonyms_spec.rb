@@ -9,8 +9,8 @@ describe Elastic::AppSearch::Client::Synonyms do
     subject { client.create_synonym_set(engine_name, synonyms) }
 
     it 'will create a synonym' do
-      expect(subject['id']).not_to be_empty
-      expect(subject['synonyms']).to eq(synonyms)
+      expect(subject['id']).not_to(be_empty)
+      expect(subject['synonyms']).to(eq(synonyms))
     end
   end
 
@@ -21,21 +21,21 @@ describe Elastic::AppSearch::Client::Synonyms do
     subject { client.get_synonym_set(engine_name, synonym_set_id) }
 
     it 'will retrieve a synonym set' do
-      expect(subject['id']).to eq(synonym_set_id)
-      expect(subject['synonyms']).to eq(synonyms)
+      expect(subject['id']).to(eq(synonym_set_id))
+      expect(subject['synonyms']).to(eq(synonyms))
     end
   end
 
   context '#update_synonym_set' do
     let(:synonyms) { ['park', 'trail'] }
-    let(:updated_synonyms) { ['park', 'trail', 'system'] }
+    let(:updated_synonyms) { %w[park trail system] }
     let(:synonym_set_id) { client.create_synonym_set(engine_name, synonyms)['id'] }
 
     subject { client.update_synonym_set(engine_name, synonym_set_id, updated_synonyms) }
 
     it 'will update a synonym set' do
-      expect(subject['id']).to eq(synonym_set_id)
-      expect(subject['synonyms']).to eq(updated_synonyms)
+      expect(subject['id']).to(eq(synonym_set_id))
+      expect(subject['synonyms']).to(eq(updated_synonyms))
     end
   end
 
@@ -43,12 +43,12 @@ describe Elastic::AppSearch::Client::Synonyms do
     subject { client.list_synonym_sets(engine_name, :current => 2, :size => 10) }
 
     it 'will list synonyms' do
-      expect(subject['results']).to eq([])
+      expect(subject['results']).to(eq([]))
     end
 
     it 'support paging params' do
-      expect(subject['meta']['page']['current']).to eq(2)
-      expect(subject['meta']['page']['size']).to eq(10)
+      expect(subject['meta']['page']['current']).to(eq(2))
+      expect(subject['meta']['page']['size']).to(eq(10))
     end
   end
 
@@ -59,7 +59,7 @@ describe Elastic::AppSearch::Client::Synonyms do
     subject { client.destroy_synonym_set(engine_name, synonym_set_id) }
 
     it 'will delete a synonym set' do
-      expect(subject['deleted']).to eq(true)
+      expect(subject['deleted']).to(eq(true))
     end
   end
 end

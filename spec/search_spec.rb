@@ -11,10 +11,11 @@ describe Elastic::AppSearch::Client::Search do
       let(:options) { { 'page' => { 'size' => 2 } } }
 
       it 'should execute a search query' do
-        expect(subject).to match(
+        expected = {
           'meta' => anything,
           'results' => [anything, anything]
-        )
+        }
+        expect(subject).to(match(expected))
       end
     end
 
@@ -31,18 +32,17 @@ describe Elastic::AppSearch::Client::Search do
 
         it 'should execute a multi search query' do
           response = subject
-          expect(response).to match(
-            [
-              {
-                'meta' => anything,
-                'results' => [{ 'id' => { 'raw' => '1' }, 'title' => anything, '_meta' => anything }]
-              },
-              {
-                'meta' => anything,
-                'results' => [{ 'id' => { 'raw' => '2' }, 'title' => anything, '_meta' => anything }]
-              }
-            ]
-          )
+          expected = [
+            {
+              'meta' => anything,
+              'results' => [{ 'id' => { 'raw' => '1' }, 'title' => anything, '_meta' => anything }]
+            },
+            {
+              'meta' => anything,
+              'results' => [{ 'id' => { 'raw' => '2' }, 'title' => anything, '_meta' => anything }]
+            }
+          ]
+          expect(response).to(match(expected))
         end
       end
 
@@ -56,18 +56,18 @@ describe Elastic::AppSearch::Client::Search do
 
         it 'should execute a multi search query' do
           response = subject
-          expect(response).to match(
-            [
-              {
-                'meta' => anything,
-                'results' => [{ 'id' => { 'raw' => '1' }, 'title' => anything, '_meta' => anything }]
-              },
-              {
-                'meta' => anything,
-                'results' => [{ 'id' => { 'raw' => '2' }, 'title' => anything, '_meta' => anything }]
-              }
-            ]
-          )
+          expected = [
+            {
+              'meta' => anything,
+              'results' => [{ 'id' => { 'raw' => '1' }, 'title' => anything, '_meta' => anything }]
+            },
+            {
+              'meta' => anything,
+              'results' => [{ 'id' => { 'raw' => '2' }, 'title' => anything, '_meta' => anything }]
+            }
+          ]
+
+          expect(response).to(match(expected))
         end
       end
 
@@ -85,13 +85,12 @@ describe Elastic::AppSearch::Client::Search do
         end
 
         it 'should throw an appropriate error' do
-          expect { subject }.to raise_error do |e|
-            expect(e).to be_a(Elastic::AppSearch::BadRequest)
-            expect(e.errors).to eq(['Search fields contains invalid field: taco', 'Search fields contains invalid field: body'])
+          expect { subject }.to(raise_error) do |e|
+            expect(e).to(be_a(Elastic::AppSearch::BadRequest))
+            expect(e.errors).to(eq(['Search fields contains invalid field: taco', 'Search fields contains invalid field: body']))
           end
         end
       end
     end
   end
-
 end
