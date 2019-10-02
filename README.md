@@ -523,19 +523,11 @@ client.update_curation(engine_name, id, options)
 
 #### Destroying Curations
 
-````ruby
+```ruby
 engine_name = 'us-national-parks'
 
 client.destroy_curation(engine_name, 'cur-5d9240d640caaeca6506b600')
-
-## Running Tests
-
-```bash
-export AS_API_KEY="[API_KEY]"
-export AS_ADMIN_KEY="[ADMIN_API_KEY]"
-export AS_HOST_IDENTIFIER="[HOST_IDENTIFIER]"
-bundle exec rspec
-````
+```
 
 #### Retrieving API Logs
 
@@ -559,10 +551,20 @@ options = {
 client.get_api_logs(engine_name, options)
 ```
 
+## Running Tests
+
+```bash
+export AS_API_KEY="[API_KEY]"
+export AS_ADMIN_KEY="[ADMIN_API_KEY]"
+export AS_HOST_IDENTIFIER="[HOST_IDENTIFIER]"
+bundle exec rspec
+```
+
 You can also run tests against a local environment by passing a `AS_API_ENDPOINT` environment variable
 
 ```bash
 export AS_API_KEY="[API_KEY]"
+export AS_ADMIN_KEY="[ADMIN_API_KEY]"
 export AS_API_ENDPOINT="http://[HOST_IDENTIFIER].api.127.0.0.1.ip.es.io:3002/api/as/v1"
 bundle exec rspec
 ```
@@ -606,3 +608,7 @@ We welcome contributors to the project. Before you begin, a couple notes...
 [Apache 2.0](https://github.com/elastic/app-search-ruby/blob/master/LICENSE.txt) © [Elastic](https://github.com/elastic)
 
 Thank you to all the [contributors](https://github.com/elastic/app-search-ruby/graphs/contributors)!
+
+```
+
+```
