@@ -461,7 +461,7 @@ engine_name = 'us-national-parks'
 client.get_schema(engine_name)
 ```
 
-#### Updating an Engine's Schema
+#### Updating an Engine's Schema or Creating a New Schema Field
 
 ```ruby
 engine_name = 'us-national-parks'
