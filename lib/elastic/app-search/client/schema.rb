@@ -4,7 +4,7 @@ module Elastic
     class Client
       module Schema
 
-        # Retrieve current schema for then engine.
+        # Retrieve schema for the current engine.
         def get_schema(engine_name)
           get("engines/#{engine_name}/schema")
         end
