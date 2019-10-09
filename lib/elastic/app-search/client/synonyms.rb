@@ -1,4 +1,4 @@
-# Synonyms API - https://swiftype.com/documentation/app-search/api/analytics
+# Synonyms API - https://swiftype.com/documentation/app-search/api/synonyms
 module Elastic
   module AppSearch
     class Client
