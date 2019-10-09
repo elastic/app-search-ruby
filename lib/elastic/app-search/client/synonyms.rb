@@ -15,13 +15,13 @@ module Elastic
         end
 
         # Create a new synonym set
-        def create_synonym_set(engine_name, synonyms)
-          post("engines/#{engine_name}/synonyms", :synonyms => synonyms)
+        def create_synonym_set(engine_name, body)
+          post("engines/#{engine_name}/synonyms", body)
         end
 
         # Update an existing synonym set
-        def update_synonym_set(engine_name, id, synonyms)
-          put("engines/#{engine_name}/synonyms/#{id}", :synonyms => synonyms)
+        def update_synonym_set(engine_name, id, body)
+          put("engines/#{engine_name}/synonyms/#{id}", body)
         end
 
         # Delete a synonym set by id

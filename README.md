@@ -376,7 +376,7 @@ client.get_count_analytics(engine_name, options)
 ```ruby
 engine_name = 'us-national-parks'
 
-client.create_synonym_set(engine_name, ['park', 'trail'])
+client.create_synonym_set(engine_name, :synonyms => ['park', 'trail'])
 ```
 
 #### Retrieving Synonym Sets
@@ -400,7 +400,7 @@ client.list_synonym_sets(engine_name, :current => 1, :size => 20)
 ```ruby
 engine_name = 'us-national-parks'
 
-client.update_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c', ['park', 'trail', 'ground'])
+client.update_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c', :synonyms => ['park', 'trail', 'ground'])
 ```
 
 #### Destroying Synonym Sets

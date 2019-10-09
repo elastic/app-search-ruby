@@ -6,7 +6,6 @@ describe Elastic::AppSearch::Client::Click do
 
   context '#log_click_through' do
     let(:documents) { [first_document, second_document] }
-    let(:request_id) { 'id' }
     let(:first_document_id) { 'id' }
     let(:first_document) { { 'id' => first_document_id } }
     let(:second_document_id) { 'another_id' }

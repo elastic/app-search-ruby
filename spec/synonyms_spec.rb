@@ -6,7 +6,7 @@ describe Elastic::AppSearch::Client::Synonyms do
 
   context '#create_synonym_set' do
     let(:synonyms) { ['park', 'trail'] }
-    subject { client.create_synonym_set(engine_name, synonyms) }
+    subject { client.create_synonym_set(engine_name, :synonyms => synonyms) }
 
     it 'will create a synonym' do
       expect(subject['id']).not_to(be_empty)
@@ -16,7 +16,7 @@ describe Elastic::AppSearch::Client::Synonyms do
 
   context '#get_synonym_set' do
     let(:synonyms) { ['park', 'trail'] }
-    let(:synonym_set_id) { client.create_synonym_set(engine_name, synonyms)['id'] }
+    let(:synonym_set_id) { client.create_synonym_set(engine_name, :synonyms => synonyms)['id'] }
 
     subject { client.get_synonym_set(engine_name, synonym_set_id) }
 
@@ -29,9 +29,9 @@ describe Elastic::AppSearch::Client::Synonyms do
   context '#update_synonym_set' do
     let(:synonyms) { ['park', 'trail'] }
     let(:updated_synonyms) { %w[park trail system] }
-    let(:synonym_set_id) { client.create_synonym_set(engine_name, synonyms)['id'] }
+    let(:synonym_set_id) { client.create_synonym_set(engine_name, :synonyms => synonyms)['id'] }
 
-    subject { client.update_synonym_set(engine_name, synonym_set_id, updated_synonyms) }
+    subject { client.update_synonym_set(engine_name, synonym_set_id, :synonyms => updated_synonyms) }
 
     it 'will update a synonym set' do
       expect(subject['id']).to(eq(synonym_set_id))
@@ -54,7 +54,7 @@ describe Elastic::AppSearch::Client::Synonyms do
 
   context '#destroy_synonym_set' do
     let(:synonyms) { ['park', 'trail'] }
-    let(:synonym_set_id) { client.create_synonym_set(engine_name, synonyms)['id'] }
+    let(:synonym_set_id) { client.create_synonym_set(engine_name, :synonyms => synonyms)['id'] }
 
     subject { client.destroy_synonym_set(engine_name, synonym_set_id) }
 
