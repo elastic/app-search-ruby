@@ -417,6 +417,12 @@ client.destroy_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c')
 client.list_credentials(:current => 1, :size => 20)
 ```
 
+#### Retrieving Credentials
+
+```ruby
+client.get_credential('reading-private-key')
+```
+
 #### Creating Credentials
 
 ```ruby
