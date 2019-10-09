@@ -38,7 +38,7 @@ describe Elastic::AppSearch::Client::Credentials do
     after { client.destroy_credential(key_name) }
     subject { client.update_credential(key_name, updated_api_key) }
 
-    it 'will create an API Key' do
+    it 'will update an API Key' do
       expect(subject['name']).to(eq(key_name))
       expect(subject['write']).to(eq(true))
     end
