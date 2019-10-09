@@ -192,7 +192,6 @@ client.search(engine_name, query, options)
 
 ```ruby
 engine_name = 'favorite-videos'
-
 queries = [{
   :query => 'cat',
   :options => { :search_fields => { :title => {} }}
@@ -208,7 +207,6 @@ client.multi_search(engine_name, queries)
 
 ```ruby
 engine_name = 'favorite-videos'
-
 options = {
   :size => 3,
   :types => {
@@ -233,30 +231,29 @@ client.show_settings(engine_name)
 
 ```ruby
 engine_name = 'favorite-videos'
-
 settings = {
-  "search_fields" => {
-    "id" => {
-      "weight" => 1
+  'search_fields' => {
+    'id' => {
+      'weight' => 1
     },
-    "url" => {
-      "weight" => 1
+    'url' => {
+      'weight' => 1
     },
-    "title" => {
-      "weight" => 1
+    'title' => {
+      'weight' => 1
     },
-    "body" => {
-      "weight" => 1
+    'body' => {
+      'weight' => 1
     },
   },
-  "boosts" => {
-    "title" => [
+  'boosts' => {
+    'title' => [
       {
-        "type" => "value",
-        "factor" => 9.5,
-        "operation" => "multiply",
-        "value" => [
-          "Titanic"
+        'type' => 'value',
+        'factor' => 9.5,
+        'operation' => 'multiply',
+        'value' => [
+          'Titanic'
         ]
       }
     ]
@@ -292,10 +289,279 @@ client = Elastic::AppSearch::Client.new(host_identifier: 'host-c5s2mj', api_key:
 client.search('national-parks-demo', 'everglade')
 ```
 
+#### Log click-through
+
+Logging a click through
+
+```ruby
+engine_name = 'favorite-videos'
+options = {
+  :query => 'cat videos',
+  :document_id => 'INscMGmhmX4',
+  :request_id => 'e4c4dea0bd7ad3d2f676575ef16dc7d2',
+  :tags => ['firefox', 'web browser']
+}
+
+client.log_click_through(engine_name, options)
+```
+
+#### Analytics - Number of clicks-throughs received by a document
+
+```ruby
+engine_name = 'favorite-videos'
+options = {
+  :query => 'cats',
+  :page => {
+    :size => 20,
+  },
+  :filters => {
+    :date => {
+      :from => '2019-04-11T00:00:00+00:00',
+      :to => '2019-04-13T00:00:00+00:00'
+    }
+  }
+}
+
+client.get_top_clicks_analytics(engine_name, options)
+```
+
+#### Analytics - Queries, number of queries, and clicks received
+
+```ruby
+engine_name = 'favorite-videos'
+options = {
+  :page => {
+    :size => 20
+  },
+  :filters => {
+    :date => {
+      :from => '2019-04-11T00:00:00+00:00',
+      :to => '2019-04-13T00:00:00+00:00'
+    }
+  }
+}
+
+client.get_top_queries_analytics(engine_name, options)
+```
+
+#### Analytics - Number of clicks and total number of queries
+
+```ruby
+engine_name = 'favorite-videos'
+options = {
+  :filters => {
+    :all => [
+      {
+        :tag => ['mobile', 'web']
+      },{
+        :query => 'cats'
+      }, {
+        :document_id => '163'
+      }, {
+        :date => {
+          :from => '2018-07-05T12:00:00+00:00',
+          :to => '2018-07-05T14:00:00+00:00'
+        }
+      }
+    ]
+  },
+  :interval => 'hour'
+}
+
+client.get_count_analytics(engine_name, options)
+```
+
+#### Creating Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.create_synonym_set(engine_name, :synonyms => ['park', 'trail'])
+```
+
+#### Retrieving Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.get_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c')
+```
+
+#### Listing Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.list_synonym_sets(engine_name, :current => 1, :size => 20)
+```
+
+#### Updating Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.update_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c', :synonyms => ['park', 'trail', 'ground'])
+```
+
+#### Destroying Synonym Sets
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.destroy_synonym_set(engine_name, 'syn-5d8e6b5d40caae7dcb6e1b9c')
+```
+
+#### Listing Credentials
+
+```ruby
+client.list_credentials(:current => 1, :size => 20)
+```
+
+#### Retrieving Credentials
+
+```ruby
+client.get_credential('reading-private-key')
+```
+
+#### Creating Credentials
+
+```ruby
+client.create_credential({
+  :name => 'reading-private-key',
+  :type => 'private',
+  :read => true,
+  :write => false,
+  :access_all_engines => false,
+  :engines => [
+    'favorite-videos'
+  ]
+})
+```
+
+#### Updating Credentials
+
+```ruby
+client.update_credential('reading-private-key', {
+  :name => 'reading-private-key',
+  :type => 'private',
+  :read => true,
+  :write => true,
+  :access_all_engines => false,
+  :engines => [
+    'favorite-videos'
+  ]
+})
+```
+
+#### Destroying Credentials
+
+```ruby
+client.destroy_credential('reading-private-key')
+```
+
+#### Retrieving an Engine's Schema
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.get_schema(engine_name)
+```
+
+#### Updating an Engine's Schema or Creating a New Schema Field
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.update_schema(engine_name, 'square_km' => 'number')
+```
+
+#### Creating Curations
+
+```ruby
+engine_name = 'us-national-parks'
+options = {
+  'queries' => [
+    'zion'
+  ],
+  'promoted' => [
+    'doc-5d8e413b40caaedab76e3c96'
+  ],
+  'hidden' => [
+    'doc-5d8e413d40caae335e06c374'
+  ]
+}
+
+client.create_curation(engine_name, options)
+```
+
+#### Retrieving Curations
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.get_curation(engine_name, 'cur-5d9240d640caaeca6506b600')
+```
+
+#### Listing Curations
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.list_curations(engine_name, current: 1, size: 20)
+```
+
+#### Updating Curations
+
+```ruby
+engine_name = 'us-national-parks'
+id = 'cur-5d9240d640caaeca6506b600'
+options = {
+  'queries' => [
+    'zion'
+  ],
+  'promoted' => [
+    'doc-5d8e413b40caaedab76e3c96'
+  ]
+}
+
+client.update_curation(engine_name, id, options)
+```
+
+#### Destroying Curations
+
+```ruby
+engine_name = 'us-national-parks'
+
+client.destroy_curation(engine_name, 'cur-5d9240d640caaeca6506b600')
+```
+
+#### Retrieving API Logs
+
+```ruby
+engine_name = 'us-national-parks'
+options = {
+  'filters' => {
+    'date' => {
+      'from' => '2019-09-23T00:00:00+00:00',
+      'to' => '2019-09-28T00:00:00+00:00'
+    }
+  },
+  'page' => {
+    'total_results' => 100,
+    'size' => 20
+  },
+  'query' => 'search',
+  'sort_direction' => 'desc'
+}
+
+client.get_api_logs(engine_name, options)
+```
+
 ## Running Tests
 
 ```bash
 export AS_API_KEY="[API_KEY]"
+export AS_ADMIN_KEY="[ADMIN_API_KEY]"
 export AS_HOST_IDENTIFIER="[HOST_IDENTIFIER]"
 bundle exec rspec
 ```
@@ -304,6 +570,7 @@ You can also run tests against a local environment by passing a `AS_API_ENDPOINT
 
 ```bash
 export AS_API_KEY="[API_KEY]"
+export AS_ADMIN_KEY="[ADMIN_API_KEY]"
 export AS_API_ENDPOINT="http://[HOST_IDENTIFIER].api.127.0.0.1.ip.es.io:3002/api/as/v1"
 bundle exec rspec
 ```

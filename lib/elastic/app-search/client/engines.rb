@@ -4,6 +4,7 @@ module Elastic
   module AppSearch
     class Client
       module Engines
+
         def list_engines(current: 1, size: 20)
           get("engines", :page => { :current => current, :size => size })
         end
@@ -21,6 +22,7 @@ module Elastic
         def destroy_engine(engine_name)
           delete("engines/#{engine_name}")
         end
+
       end
     end
   end

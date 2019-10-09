@@ -3,6 +3,10 @@ module ConfigHelper
     ENV.fetch('AS_API_KEY', 'API_KEY')
   end
 
+  def ConfigHelper.get_as_admin_key
+    ENV.fetch('AS_ADMIN_KEY', 'ADMIN_KEY')
+  end
+
   def ConfigHelper.get_as_host_identifier
     ENV['AS_ACCOUNT_HOST_KEY'] || ENV['AS_HOST_IDENTIFIER'] || 'ACCOUNT_HOST_KEY'
   end

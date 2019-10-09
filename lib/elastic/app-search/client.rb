@@ -7,11 +7,18 @@ module Elastic
   module AppSearch
     # API client for the {Elastic App Search API}[https://www.elastic.co/cloud/app-search-service].
     class Client
+      autoload :Analytics, 'elastic/app-search/client/analytics'
+      autoload :Click, 'elastic/app-search/client/click'
+      autoload :Credentials, 'elastic/app-search/client/credentials'
+      autoload :Curations, 'elastic/app-search/client/curations'
       autoload :Documents, 'elastic/app-search/client/documents'
       autoload :Engines, 'elastic/app-search/client/engines'
+      autoload :Logs, 'elastic/app-search/client/logs'
+      autoload :Schema, 'elastic/app-search/client/schema'
       autoload :Search, 'elastic/app-search/client/search'
-      autoload :QuerySuggestion, 'elastic/app-search/client/query_suggestion'
       autoload :SearchSettings, 'elastic/app-search/client/search_settings'
+      autoload :Synonyms, 'elastic/app-search/client/synonyms'
+      autoload :QuerySuggestion, 'elastic/app-search/client/query_suggestion'
 
       DEFAULT_TIMEOUT = 15
 
@@ -56,12 +63,19 @@ module Elastic
         end
       end
 
+      include Elastic::AppSearch::Client::Analytics
+      include Elastic::AppSearch::Client::Click
+      include Elastic::AppSearch::Client::Credentials
+      include Elastic::AppSearch::Client::Curations
       include Elastic::AppSearch::Client::Documents
       include Elastic::AppSearch::Client::Engines
+      include Elastic::AppSearch::Client::Logs
+      include Elastic::AppSearch::Client::Schema
       include Elastic::AppSearch::Client::Search
-      include Elastic::AppSearch::Client::SignedSearchOptions
-      include Elastic::AppSearch::Client::QuerySuggestion
       include Elastic::AppSearch::Client::SearchSettings
+      include Elastic::AppSearch::Client::SignedSearchOptions
+      include Elastic::AppSearch::Client::Synonyms
+      include Elastic::AppSearch::Client::QuerySuggestion
     end
   end
 end
