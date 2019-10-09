@@ -9,6 +9,11 @@ module Elastic
           get("credentials", :page => { :current => current, :size => size })
         end
 
+        # Retrieve a credential
+        def get_credential(name)
+          get("credentials/#{name}")
+        end
+
         # Create a new credential
         def create_credential(options)
           post("credentials", options)
