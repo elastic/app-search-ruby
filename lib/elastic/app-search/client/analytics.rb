@@ -9,7 +9,7 @@ module Elastic
           post("engines/#{engine_name}/analytics/clicks", options)
         end
 
-        # Returns queries anlaytics by usage count
+        # Returns queries analytics by usage count
         def get_top_queries_analytics(engine_name, options)
           post("engines/#{engine_name}/analytics/queries", options)
         end
