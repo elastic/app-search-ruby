@@ -49,7 +49,7 @@ describe Elastic::AppSearch::Client::Credentials do
     after { client.destroy_credential(key_name) }
     subject { client.list_credentials }
 
-    it 'will create an API Key' do
+    it 'will list all API Keys' do
       expect(subject['results'].map { |r| r['name'] }.include?(key_name)).to(eq(true))
     end
   end
