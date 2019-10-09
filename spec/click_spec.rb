@@ -5,13 +5,14 @@ describe Elastic::AppSearch::Client::Click do
   let(:client) { Elastic::AppSearch::Client.new(client_options) }
 
   context '#log_click_through' do
-    let(:documents_response) { client.index_documents(engine_name, documents) }
     let(:documents) { [first_document, second_document] }
     let(:request_id) { 'id' }
     let(:first_document_id) { 'id' }
     let(:first_document) { { 'id' => first_document_id } }
     let(:second_document_id) { 'another_id' }
     let(:second_document) { { 'id' => second_document_id } }
+
+    before { client.index_documents(engine_name, documents) }
 
     subject do
       client.log_click_through(
