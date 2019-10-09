@@ -9,7 +9,7 @@ module Elastic
           get("engines/#{engine_name}/schema")
         end
 
-        # Update schema for the current engine.
+        # Create a new schema field or update existing schema for the current engine.
         def update_schema(engine_name, schema)
           post("engines/#{engine_name}/schema", schema)
         end
