@@ -7,7 +7,8 @@ describe Elastic::AppSearch::Client::MetaEngines do
   let(:client) { Elastic::AppSearch::Client.new(client_options) }
   let(:source_engines) { [engine_name] }
 
-  context 'Meta Engines', :skip => "Unable to test platinum features in CI." do
+  # CI currently runs against SaaS. This feature is a Self-Managed only feature.
+  context 'Meta Engines', :skip => "Unable to test Self-Managed features in CI." do
 
     after do
       client.destroy_engine(meta_engine_name) rescue Elastic::AppSearch::NonExistentRecord
@@ -36,10 +37,10 @@ describe Elastic::AppSearch::Client::MetaEngines do
       end
     end
 
-    context '#add_meta_engine_source' do
+    context '#add_meta_engine_sources' do
       before do
         client.create_meta_engine(meta_engine_name, source_engines)
-        client.remove_meta_engine_sources(meta_engine_name, source_engines)
+        client.delete_meta_engine_sources(meta_engine_name, source_engines)
       end
 
       it 'should add the source engine' do
@@ -53,13 +54,13 @@ describe Elastic::AppSearch::Client::MetaEngines do
       end
     end
 
-    context '#remove_meta_engine_sources' do
+    context '#delete_meta_engine_sources' do
       before do
         client.create_meta_engine(meta_engine_name, source_engines)
       end
 
       it 'should remove the source engine' do
-        expect { client.remove_meta_engine_sources(meta_engine_name, source_engines) }.to_not raise_error do |engine|
+        expect { client.delete_meta_engine_sources(meta_engine_name, source_engines) }.to_not raise_error do |engine|
           expect(engine).to be_kind_of(Hash)
           expect(engine['name']).to eq(meta_engine_name)
           expect(engine['type']).to eq('meta')
