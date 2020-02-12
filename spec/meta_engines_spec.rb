@@ -7,7 +7,7 @@ describe Elastic::AppSearch::Client::MetaEngines do
   let(:client) { Elastic::AppSearch::Client.new(client_options) }
   let(:source_engines) { [engine_name] }
 
-  context 'Meta Engines', :skip => "Unable to test platinum feature in CI." do
+  context 'Meta Engines', :skip => "Unable to test platinum features in CI." do
 
     after do
       client.destroy_engine(meta_engine_name) rescue Elastic::AppSearch::NonExistentRecord
@@ -44,6 +44,10 @@ describe Elastic::AppSearch::Client::MetaEngines do
 
       it 'should add the source engine' do
         expect { client.add_meta_engine_sources(meta_engine_name, source_engines) }.to_not raise_error do |engine|
+          expect(engine).to be_kind_of(Hash)
+          expect(engine['name']).to eq(meta_engine_name)
+          expect(engine['type']).to eq('meta')
+          expect(engine['source_engines']).to be_kind_of(Array)
           expect(engine['source_engines']).to eq(source_engines)
         end
       end
@@ -56,6 +60,10 @@ describe Elastic::AppSearch::Client::MetaEngines do
 
       it 'should remove the source engine' do
         expect { client.remove_meta_engine_sources(meta_engine_name, source_engines) }.to_not raise_error do |engine|
+          expect(engine).to be_kind_of(Hash)
+          expect(engine['name']).to eq(meta_engine_name)
+          expect(engine['type']).to eq('meta')
+          expect(engine['source_engines']).to be_kind_of(Array)
           expect(engine['source_engines']).to be_empty
         end
       end
