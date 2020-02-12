@@ -35,7 +35,7 @@ To guarantee compatibility, use the most recent version of this library within t
 
 For example, for App Search `7.3`, use `7.3` of this library or above, but not `8.0`.
 
-If you are a [SaaS](https://app.swiftype.com/as) user, simply use the most recent version of this library.
+If you are using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you should use the version 7.5.x of the client.
 
 ## Usage
 
