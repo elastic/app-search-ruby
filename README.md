@@ -2,7 +2,7 @@
 
 <p align="center"><a href="https://circleci.com/gh/elastic/app-search-ruby"><img src="https://circleci.com/gh/elastic/app-search-ruby.svg?style=svg" alt="CircleCI build"></a></p>
 
-> A first-party Ruby client for building excellent, relevant search experiences with Elastic App Search.
+> A first-party Ruby client for building excellent, relevant search experiences with [Elastic App Search](https://www.elastic.co/products/app-search).
 
 ## Contents
 
@@ -35,34 +35,36 @@ To guarantee compatibility, use the most recent version of this library within t
 
 For example, for App Search `7.3`, use `7.3` of this library or above, but not `8.0`.
 
-If you are a [SaaS](https://app.swiftype.com/as) user, simply use the most recent version of this library.
+If you are using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you should use the version 7.5.x of the client.
 
 ## Usage
 
-### Setup: Configuring the client and authentication
+#### Setup: Configuring the client and authentication
 
-Create a new instance of the Elastic App Search Client. This requires your `[HOST_IDENTIFIER]`, which
-identifies the unique hostname of the App Search API that is associated with your App Search account.
-It also requires a valid `[API_KEY]`, which authenticates requests to the API. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
+Using this client assumes that you have already an instance of [Elastic App Search](https://www.elastic.co/products/app-search) up and running.
 
-You can find your `[API_KEY]` and your `[HOST_IDENTIFIER]` within the [Credentials](https://app.swiftype.com/as/credentials) menu:
+Once done, a client can be instantiated using the `[API_KEY]` and the `[API_ENDPOINT]` URL of your App Search setup:
 
 ```ruby
 require 'elastic-app-search'
 
-client = Elastic::AppSearch::Client.new(:host_identifier => 'host-c5s2mj', :api_key => 'private-mu75psc5egt9ppzuycnc2mc3')
+client = Elastic::AppSearch::Client.new(:api_key => 'private-xxxxxxxxxxxxxxxxxxx', :api_endpoint => 'http://localhost:3002/api/as/v1/')
 ```
+Note:
 
-### Using with App Search Managed Deploys
+The `[API_KEY]` authenticates requests to the API.
+You can use any key type with the client, however each has a different scope.
+For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
 
-The client can be configured to use a managed deploy by using the
-`api_endpoint` parameter. Since managed deploys do not rely on a `[HOST_IDENTIFIER]`
-, it can be omitted.
+##### Swiftype.com App Search users:
+
+When using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you can configure the client using your `[HOST_IDENTIFIER]` instead of the `[API_ENDPOINT]`.
+The `[HOST_IDENTIFIER]` can be found within the [Credentials](https://app.swiftype.com/ascredentials) menu.
 
 ```ruby
 require 'elastic-app-search'
 
-client = Elastic::AppSearch::Client.new(:api_key => 'private-mu75psc5egt9ppzuycnc2mc3', :api_endpoint => 'http://localhost:3002/api/as/v1/')
+client = Elastic::AppSearch::Client.new(:host_identifier => 'host-c5s2mj', :api_key => 'private-xxxxxxxxxxxxxxxxxxx')
 ```
 
 ### API Methods
