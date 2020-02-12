@@ -39,30 +39,32 @@ If you are using the [SaaS version available on swiftype.com](https://app.swifty
 
 ## Usage
 
-### Setup: Configuring the client and authentication
+#### Setup: Configuring the client and authentication
 
-Create a new instance of the Elastic App Search Client. This requires your `[HOST_IDENTIFIER]`, which
-identifies the unique hostname of the App Search API that is associated with your App Search account.
-It also requires a valid `[API_KEY]`, which authenticates requests to the API. You can use any key type with the client, however each has a different scope. For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
+Using this client assumes that you have already an instance of [Elastic App Search](https://www.elastic.co/products/app-search) up and running.
 
-You can find your `[API_KEY]` and your `[HOST_IDENTIFIER]` within the [Credentials](https://app.swiftype.com/as/credentials) menu:
+Once done, a client can be instantiated using the `[API_KEY]` and the `[API_ENDPOINT]` URL of your App Search setup:
 
 ```ruby
 require 'elastic-app-search'
 
-client = Elastic::AppSearch::Client.new(:host_identifier => 'host-c5s2mj', :api_key => 'private-mu75psc5egt9ppzuycnc2mc3')
+client = Elastic::AppSearch::Client.new(:api_key => 'private-xxxxxxxxxxxxxxxxxxx', :api_endpoint => 'http://localhost:3002/api/as/v1/')
 ```
+Note:
 
-### Using with App Search Managed Deploys
+The `[API_KEY]` authenticates requests to the API.
+You can use any key type with the client, however each has a different scope.
+For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
 
-The client can be configured to use a managed deploy by using the
-`api_endpoint` parameter. Since managed deploys do not rely on a `[HOST_IDENTIFIER]`
-, it can be omitted.
+##### Swiftype.com App Search users:
+
+When using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you can configure the client using your `[HOST_IDENTIFIER]` instead of the `[API_ENDPOINT]`.
+The `[HOST_IDENTIFIER]` can be found within the [Credentials](https://app.swiftype.com/ascredentials) menu.
 
 ```ruby
 require 'elastic-app-search'
 
-client = Elastic::AppSearch::Client.new(:api_key => 'private-mu75psc5egt9ppzuycnc2mc3', :api_endpoint => 'http://localhost:3002/api/as/v1/')
+client = Elastic::AppSearch::Client.new(:host_identifier => 'host-c5s2mj', :api_key => 'private-xxxxxxxxxxxxxxxxxxx')
 ```
 
 ### API Methods
