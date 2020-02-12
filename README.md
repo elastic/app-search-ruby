@@ -176,6 +176,33 @@ engine_name = 'favorite-videos'
 client.destroy_engine(engine_name)
 ```
 
+#### Creating Meta Engines
+
+```ruby
+engine_name = 'videos-engine'
+sources_engines = ['favorite-videos', 'all-videos']
+
+client.create_meta_engine(engine_name, source_engines)
+```
+
+#### Adding Meta Engines Source
+
+```ruby
+engine_name = 'videos-engine'
+sources_engines = ['fun-videos', 'cat-videos']
+
+client.add_meta_engine_source(engine_name, source_engines)
+```
+
+#### Adding Meta Engines Source
+
+```ruby
+engine_name = 'videos-engine'
+sources_engines = ['nsfw-videos']
+
+client.remove_meta_engine_sources(engine_name, source_engines)
+```
+
 #### Searching
 
 ```ruby
