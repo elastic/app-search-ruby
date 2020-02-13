@@ -50,6 +50,7 @@ require 'elastic-app-search'
 
 client = Elastic::AppSearch::Client.new(:api_key => 'private-xxxxxxxxxxxxxxxxxxx', :api_endpoint => 'http://localhost:3002/api/as/v1/')
 ```
+
 Note:
 
 The `[API_KEY]` authenticates requests to the API.
@@ -176,6 +177,33 @@ client.create_engine(engine_name)
 engine_name = 'favorite-videos'
 
 client.destroy_engine(engine_name)
+```
+
+#### Creating Meta Engines
+
+```ruby
+engine_name = 'videos-engine'
+sources_engines = ['favorite-videos', 'all-videos']
+
+client.create_meta_engine(engine_name, source_engines)
+```
+
+#### Adding Meta Engines Source
+
+```ruby
+engine_name = 'videos-engine'
+sources_engines = ['fun-videos', 'cat-videos']
+
+client.add_meta_engine_sources(engine_name, source_engines)
+```
+
+#### Adding Meta Engines Source
+
+```ruby
+engine_name = 'videos-engine'
+sources_engines = ['nsfw-videos']
+
+client.delete_meta_engine_sources(engine_name, source_engines)
 ```
 
 #### Searching

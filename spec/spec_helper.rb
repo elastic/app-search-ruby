@@ -54,6 +54,10 @@ RSpec.shared_context 'Engine Name' do
   let(:engine_name) { "ruby-client-test-#{SecureRandom.hex}" }
 end
 
+RSpec.shared_context 'Meta Engine Name' do
+  let(:meta_engine_name) { "ruby-client-test-#{SecureRandom.hex}" }
+end
+
 RSpec.shared_context 'Test Engine' do
   let(:engine_name) { "ruby-client-test-#{SecureRandom.hex}" }
 
