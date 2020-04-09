@@ -55,12 +55,12 @@ Note:
 
 The `[API_KEY]` authenticates requests to the API.
 You can use any key type with the client, however each has a different scope.
-For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/credentials).
+For more information on keys, check out the [documentation](https://swiftype.com/documentation/app-search/api/credentials).
 
 ##### Swiftype.com App Search users:
 
 When using the [SaaS version available on swiftype.com](https://app.swiftype.com/as) of App Search, you can configure the client using your `[HOST_IDENTIFIER]` instead of the `[API_ENDPOINT]`.
-The `[HOST_IDENTIFIER]` can be found within the [Credentials](https://app.swiftype.com/ascredentials) menu.
+The `[HOST_IDENTIFIER]` can be found within the [Credentials](https://app.swiftype.com/as#/credentials) menu.
 
 ```ruby
 require 'elastic-app-search'
@@ -315,7 +315,8 @@ enforced_options = {
 
 signed_search_key = Elastic::AppSearch::Client.create_signed_search_key(public_search_key, public_search_key_name, enforced_options)
 
-client = Elastic::AppSearch::Client.new(host_identifier: 'host-c5s2mj', api_key: signed_search_key)
+client = Elastic::AppSearch::Client.new(:api_key => signed_search_key, :api_endpoint => 'http://localhost:3002/api/as/v1/')
+
 client.search('national-parks-demo', 'everglade')
 ```
 
