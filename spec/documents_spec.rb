@@ -126,34 +126,5 @@ describe Elastic::AppSearch::Client::Documents do
         expect(response[1]['id']).to(eq(second_document_id))
       end
     end
-
-    describe '#list_documents' do
-      let(:documents) { [first_document, second_document] }
-      let(:first_document_id) { 'id' }
-      let(:first_document) { { 'id' => first_document_id, 'url' => 'https://www.youtube.com/watch?v=v1uyQZNg2vE' } }
-      let(:second_document_id) { 'another_id' }
-      let(:second_document) { { 'id' => second_document_id, 'url' => 'https://www.youtube.com/watch?v=9T1vfsHYiKY' } }
-
-      before do
-        client.index_documents(engine_name, documents)
-      end
-
-      context 'when no options are specified' do
-        it 'will return all documents' do
-          response = client.list_documents(engine_name)
-          expect(response['results'].size).to(eq(2))
-          expect(response['results'][0]['id']).to(eq(first_document_id))
-          expect(response['results'][1]['id']).to(eq(second_document_id))
-        end
-      end
-
-      context 'when options are specified' do
-        it 'will return all documents' do
-          response = client.list_documents(engine_name, :page => { :size => 1, :current => 2 })
-          expect(response['results'].size).to(eq(1))
-          expect(response['results'][0]['id']).to(eq(second_document_id))
-        end
-      end
-    end
   end
 end

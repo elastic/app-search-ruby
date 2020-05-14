@@ -27,17 +27,33 @@ describe Elastic::AppSearch::Client do
 
   describe 'Requests' do
     it 'should include client name and version in headers' do
-      stub_request(:any, "#{client_options[:host_identifier]}.api.swiftype.com/api/as/v1/engines")
-      client.list_engines
-      expect(WebMock).to(
-        have_requested(:get, "https://#{client_options[:host_identifier]}.api.swiftype.com/api/as/v1/engines")
-        .with(
-          :headers => {
-            'X-Swiftype-Client' => 'elastic-app-search-ruby',
-            'X-Swiftype-Client-Version' => Elastic::AppSearch::VERSION
-          }
+      if (client_options[:api_endpoint])
+        stub_request(:any, "#{client_options[:api_endpoint]}engines")
+        client.list_engines
+        expect(WebMock).to(
+          have_requested(:get, "#{client_options[:api_endpoint]}engines")
+          .with(
+            :headers => {
+              'X-Swiftype-Client' => 'elastic-app-search-ruby',
+              'X-Swiftype-Client-Version' => Elastic::AppSearch::VERSION
+            }
+          )
         )
-      )
+      else
+        # CI runs against saas, so we keep this around for now. CI should be updated
+        # to use slef-managed and we should drop support "host_identifier" this.
+        stub_request(:any, "#{client_options[:host_identifier]}.api.swiftype.com/api/as/v1/engines")
+        client.list_engines
+        expect(WebMock).to(
+          have_requested(:get, "https://#{client_options[:host_identifier]}.api.swiftype.com/api/as/v1/engines")
+          .with(
+            :headers => {
+              'X-Swiftype-Client' => 'elastic-app-search-ruby',
+              'X-Swiftype-Client-Version' => Elastic::AppSearch::VERSION
+            }
+          )
+        )
+      end
     end
   end
 
