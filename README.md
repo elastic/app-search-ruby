@@ -307,6 +307,7 @@ Creating a search key that will only return the title field.
 
 ```ruby
 public_search_key = 'search-xxxxxxxxxxxxxxxxxxxxxxxx'
+# This name must match the name of the key above from your App Search dashboard
 public_search_key_name = 'search-key'
 enforced_options = {
   result_fields: { title: { raw: {} } },
