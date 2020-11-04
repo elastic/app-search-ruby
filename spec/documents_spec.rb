@@ -71,7 +71,7 @@ describe Elastic::AppSearch::Client::Documents do
         it 'should return respective errors in an array of document processing hashes' do
           expected = [
             { 'id' => anything, 'errors' => [] },
-            { 'id' => anything, 'errors' => ['Invalid field type: id must be less than 800 characters'] },
+            { 'id' => anything, 'errors' => [anything] },
           ]
           expect(subject).to(match(expected))
         end
