@@ -1,5 +1,5 @@
 module Elastic
   module AppSearch
-    VERSION = '7.9.0'
+    VERSION = '7.10.0'
   end
 end
